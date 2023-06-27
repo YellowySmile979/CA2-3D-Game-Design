@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
-    float horizontal, vertical;
+    float horizontalInput, verticalInput;
 
     public GameObject player;
 
@@ -20,20 +20,22 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        //get player input
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
         Move();
     }
+    //handles the player movement
     void Move()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            transform.position = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
-        }
+        //moves player
+        transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed * verticalInput);
+        transform.Translate(Vector3.right * Time.deltaTime * moveSpeed * horizontalInput);
     }
 }
