@@ -5,20 +5,20 @@ using UnityEngine;
 public abstract class BaseProjectile : MonoBehaviour
 {
     [Header("Data")]
-    public ProjectileData homingProjectileData;
+    public ProjectileData projectileData;
 
     [Header("Projectile Movement")]
-    public float projectileMoveSpeed;
-    public float projectileRotationSpeed;
     public Rigidbody rb;
+    public float projectileMoveSpeed, projectileRotationSpeed, projectileDamage;    
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
-        projectileRotationSpeed = homingProjectileData.rotationSpeed;
-        projectileMoveSpeed = homingProjectileData.moveSpeed;
+        projectileRotationSpeed = projectileData.rotationSpeed;
+        projectileMoveSpeed = projectileData.moveSpeed;
+        projectileDamage = projectileData.damage;
     }
 
     void FixedUpdate()

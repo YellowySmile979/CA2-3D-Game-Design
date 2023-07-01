@@ -109,9 +109,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0dc4fbde2dfbb941b90b653e4b67b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  homingProjectileData: {fileID: 11400000, guid: 95d7068bf8aba5b41a6bb29ebea746b4, type: 2}
+  projectileData: {fileID: 11400000, guid: 95d7068bf8aba5b41a6bb29ebea746b4, type: 2}
   projectileMoveSpeed: 0
   projectileRotationSpeed: 0
+  projectileDamage: 0
   rb: {fileID: 4279157559221823543}
   target: {fileID: 0}
   maxPredictionDistance: 100

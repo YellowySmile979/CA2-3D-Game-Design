@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8560e7e7e96ceee4484a043d299a98fc, type: 3}
-  m_Name: HomingProjectileData
+  m_Script: {fileID: 11500000, guid: 0d3bdd86c539f964ebca4b54a1489beb, type: 3}
+  m_Name: NormalMeleeEnemyData
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 120
+  moveSpeed: 8
   damage: 1
-  projectileType: 1
+  health: 10

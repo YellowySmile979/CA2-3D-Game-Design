@@ -28,8 +28,9 @@ public class HomingProjectile : BaseProjectile
     {
         rb = GetComponent<Rigidbody>();
 
-        projectileRotationSpeed = homingProjectileData.rotationSpeed;
-        projectileMoveSpeed = homingProjectileData.moveSpeed;
+        projectileRotationSpeed = projectileData.rotationSpeed;
+        projectileMoveSpeed = projectileData.moveSpeed;
+        projectileDamage = projectileData.damage;
     }
     //inputs this projectile's behaviour i.e. homing
     public override void ProjectileBehaviour()
@@ -37,6 +38,7 @@ public class HomingProjectile : BaseProjectile
         //if there isnt any target, try to find another, otherwise move forward and prevent rest of code from firing
         if (target == null || target != FindObjectOfType<BaseEnemy>())
         {
+            print("THIS IS FIRING");
             target = FindObjectOfType<BaseEnemy>();
             rb.velocity = transform.forward * projectileMoveSpeed;
             AvoidFloor();
@@ -105,7 +107,7 @@ public class HomingProjectile : BaseProjectile
         //otherwise destroy self
         if (collision.gameObject.GetComponent<BaseEnemy>())
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<BaseEnemy>().TakeDamage(projectileDamage);
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Floor"))

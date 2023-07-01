@@ -7,6 +7,7 @@ public class ProjectileData : ScriptableObject
 {
     public float moveSpeed;
     public float rotationSpeed;
+    public float damage;
     public enum ProjectileType
     {
         dumbFire,
