@@ -28,6 +28,8 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        targettedPlayer = FindObjectOfType<BasePlayerController>();
+
         enemyDamage = enemyData.damage;
         enemyMoveSpeed = enemyData.moveSpeed;
         enemyHealth = enemyData.health;
@@ -46,6 +48,7 @@ public abstract class BaseEnemy : MonoBehaviour
     void Move()
     {
         enemy.SetDestination(targettedPlayer.transform.position);
+        enemy.speed = enemyMoveSpeed;
     }
     //handles the enemy taking damage
     public void TakeDamage(float damage)

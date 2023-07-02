@@ -58,6 +58,25 @@ public class HomingProjectile : BaseProjectile
         AvoidFloor();
         DestroySelf();
     }
+    //gets the closest enemy within the sphere collider of the detector
+    public Transform GetClosestEnemy(List<Transform> enemies, Transform fromThis)
+    {
+        Transform bestTarget = null;
+        float closestDistanceSqr = Mathf.Infinity;
+        Vector3 currentPosition = fromThis.position;
+        foreach(Transform potentialTarget in enemies)
+        {
+            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr)
+            {
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
+            }
+        }
+        return bestTarget;
+    }
+    //self explanatory
     void DestroySelf()
     {
         if(lifeTime > 0)
@@ -69,6 +88,7 @@ public class HomingProjectile : BaseProjectile
             Destroy(this.gameObject);
         }
     }
+    //prevents the projectile from touching the floor
     void AvoidFloor()
     {
         if (transform.position.y <= floor.transform.position.y + maxDistFromGround)

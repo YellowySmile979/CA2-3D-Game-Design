@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 //randomises which enemy spawns
                 int randomEnemy = Random.Range(minRangeOfEnemiesToSpawn, maxRangeOfEnemiesToSpawn);
-                //instantiates that enemy
+                //instantiates that enemy and adds it to a temp variable
                 Instantiate(enemiesToSpawn[randomEnemy], transform.position, Quaternion.identity);
                 timeBetweenSpawns = maxTimeBetweenSpawns;
             }
@@ -58,6 +58,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 if (amountSpawnedAlready < spawnLimit)
                 {
+                    //does the same as above, just that this has a spawn limit
                     int randomEnemy = Random.Range(minRangeOfEnemiesToSpawn, maxRangeOfEnemiesToSpawn);
                     Instantiate(enemiesToSpawn[randomEnemy], transform.position, Quaternion.identity);
                 }

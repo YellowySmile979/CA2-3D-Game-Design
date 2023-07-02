@@ -134,7 +134,7 @@ MonoBehaviour:
   enemyMoveSpeed: 0
   enemyDamage: 0
   enemyHealth: 0
-  targettedPlayer: {fileID: 7481606293916106205, guid: e090049e9660941408c5d7d3a96e1793, type: 3}
+  targettedPlayer: {fileID: 0}
   enemy: {fileID: 1965901852785631385}
   maxTimeUntilNextAttack: 2
   timeUntilNextAttack: 0
@@ -190,7 +190,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1965901852785631363}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 2.5
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -200,6 +200,6 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 0.4
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
