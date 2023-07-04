@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public abstract class BasePlayerController : MonoBehaviour
 {
     [Header("Data")]
@@ -28,6 +29,11 @@ public abstract class BasePlayerController : MonoBehaviour
         playerSpeed = playerData.moveSpeed;
         playerHealth = playerData.health;
         playerDamage = playerData.damage;
+
+        if (cam == null)
+        {
+            cam = FindObjectOfType<Camera>();
+        }
     }
 
     // Update is called once per frame

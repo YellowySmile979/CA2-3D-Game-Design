@@ -21,9 +21,6 @@ public class HomingProjectile : BaseProjectile
     public GameObject floor;
     public float maxDistFromGround = 5f;
 
-    [Header("Destroy Self After Awhile")]
-    public float lifeTime = 5f;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -42,21 +39,22 @@ public class HomingProjectile : BaseProjectile
             target = FindObjectOfType<BaseEnemy>();
             rb.velocity = transform.forward * projectileMoveSpeed;
             AvoidFloor();
-            DestroySelf();
             return;
         }
 
+        //sets the leadTimePercentage
         var leadTimePercentage = Mathf.InverseLerp(
             minPredictionDistance,
             maxPredictionDistance,
             Vector3.Distance(transform.position, target.transform.position)
             );
 
+        rb.velocity = transform.forward * projectileMoveSpeed;
+
         PredictEnemyMovement(leadTimePercentage);
         AddDeviation(leadTimePercentage);
         RotateProjectile();
         AvoidFloor();
-        DestroySelf();
     }
     //gets the closest enemy within the sphere collider of the detector
     public Transform GetClosestEnemy(List<Transform> enemies, Transform fromThis)
@@ -76,18 +74,7 @@ public class HomingProjectile : BaseProjectile
         }
         return bestTarget;
     }
-    //self explanatory
-    void DestroySelf()
-    {
-        if(lifeTime > 0)
-        {
-            lifeTime -= Time.deltaTime;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    
     //prevents the projectile from touching the floor
     void AvoidFloor()
     {
