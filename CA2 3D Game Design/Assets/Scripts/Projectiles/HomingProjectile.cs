@@ -35,7 +35,6 @@ public class HomingProjectile : BaseProjectile
         //if there isnt any target, try to find another, otherwise move forward and prevent rest of code from firing
         if (target == null || target != FindObjectOfType<BaseEnemy>())
         {
-            print("THIS IS FIRING");
             target = FindObjectOfType<BaseEnemy>();
             rb.velocity = transform.forward * projectileMoveSpeed;
             AvoidFloor();

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3727901881092394791}
   - component: {fileID: 3727901881092394790}
   - component: {fileID: 3727901881092394809}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Test Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3727901881189363048}
   - component: {fileID: 3727901881189363050}
   - component: {fileID: 6082157797466090410}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ranger Player Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 098529d43479b1d4090e5fcd02d9153b, type: 2}
   player: {fileID: 3727901881092394808}
   cam: {fileID: 0}
+  level: 1
   projectile: {fileID: 6966880807928032197, guid: afbfbcc4ee5157643a3772b5e91dbec3, type: 3}
   instantiationPoint: {fileID: 3727901881092394808}
   timeTillNextSpawn: 1

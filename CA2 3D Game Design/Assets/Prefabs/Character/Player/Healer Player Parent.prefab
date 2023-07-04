@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7481606293878906769}
   - component: {fileID: 7481606293878906768}
   - component: {fileID: 7481606293878906767}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Test Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 7481606293916106205}
   - component: {fileID: 7481606293916106204}
   - component: {fileID: 1244265244}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Healer Player Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 17091d37931e2c64e9377546fbbe5259, type: 2}
   player: {fileID: 7481606293878906766}
   cam: {fileID: 0}
+  level: 1
   projectile: {fileID: 4279157559221823544, guid: cc393f5bb5bdf4940938935cd94f3fa7, type: 3}
   instantiationPoint: {fileID: 7481606293916106201}
   timeTillNextSpawn: 0.5

@@ -15,7 +15,7 @@ public abstract class BaseEnemy : MonoBehaviour
     public Rigidbody Rb => rb;
 
     [Header("Target")]
-    public BasePlayerController targettedPlayer;
+    public GameObject targettedObject;
     public NavMeshAgent enemy;
 
     [Header("Deal Damage")]
@@ -23,12 +23,17 @@ public abstract class BaseEnemy : MonoBehaviour
     [SerializeField] float timeUntilNextAttack;
     public bool canAttack;
 
+    [Header("Detect Sphere")]
+    public float overlapSphereRadius = 1f;
+    public LayerMask whatCanISee;
+    [SerializeField] Collider[] colliders;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
-        targettedPlayer = FindObjectOfType<BasePlayerController>();
+        targettedObject = FindObjectOfType<PortalObjective>().gameObject;
 
         enemyDamage = enemyData.damage;
         enemyMoveSpeed = enemyData.moveSpeed;
@@ -43,11 +48,12 @@ public abstract class BaseEnemy : MonoBehaviour
         Move();
         Timer();
         UpdateHealth();
+        DetectObjects();
     }
     //moves enemy in direction of player
     void Move()
     {
-        enemy.SetDestination(targettedPlayer.transform.position);
+        enemy.SetDestination(targettedObject.transform.position);
         enemy.speed = enemyMoveSpeed;
     }
     //handles the enemy taking damage
@@ -61,6 +67,7 @@ public abstract class BaseEnemy : MonoBehaviour
         if(enemyHealth <= 0)
         {
             print("enemy died");
+            WaveManager.Instance.existingEnemies.Remove(this);
             Destroy(gameObject);
         }
     }
@@ -75,6 +82,22 @@ public abstract class BaseEnemy : MonoBehaviour
         else
         {
             canAttack = true;
+        }
+    }
+    //detects the player and causes enemy to pathfind instead to the player than the target
+    void DetectObjects()
+    {
+        colliders = Physics.OverlapSphere(transform.position, overlapSphereRadius, whatCanISee);
+        foreach(Collider collider in colliders)
+        {
+            if (collider.gameObject.GetComponentInParent<BasePlayerController>())
+            {
+                targettedObject = collider.gameObject;
+            }
+        }
+        if (colliders.Length <= 0)
+        {
+            targettedObject = FindObjectOfType<PortalObjective>().gameObject;
         }
     }
     //checks to see if collided collider is player and enemy can attack
@@ -94,5 +117,10 @@ public abstract class BaseEnemy : MonoBehaviour
             collision.gameObject.GetComponentInParent<BasePlayerController>().TakeDamage(enemyDamage);
             timeUntilNextAttack = maxTimeUntilNextAttack;
         }
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, overlapSphereRadius);
     }
 }

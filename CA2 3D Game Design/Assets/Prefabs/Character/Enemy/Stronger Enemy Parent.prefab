@@ -134,11 +134,16 @@ MonoBehaviour:
   enemyMoveSpeed: 0
   enemyDamage: 0
   enemyHealth: 0
-  targettedPlayer: {fileID: 0}
+  targettedObject: {fileID: 0}
   enemy: {fileID: 1965901852785631385}
   maxTimeUntilNextAttack: 2
   timeUntilNextAttack: 0
   canAttack: 0
+  overlapSphereRadius: 10
+  whatCanISee:
+    serializedVersion: 2
+    m_Bits: 72
+  colliders: []
 --- !u!54 &1965901852785631390
 Rigidbody:
   m_ObjectHideFlags: 0

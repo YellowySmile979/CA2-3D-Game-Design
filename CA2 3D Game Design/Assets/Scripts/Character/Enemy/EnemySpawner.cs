@@ -15,8 +15,8 @@ public class EnemySpawner : MonoBehaviour
     [Header("Limits")]
     public int spawnLimit;
     int amountSpawnedAlready;
-    public bool includeSpawnLimit;
-    public bool canSpawn = false;
+    public bool includeSpawnLimit, hasGiven;
+    int count = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(canSpawn) SpawnEnemies();
+        if(!hasGiven) SpawnEnemies();
     }
     void SpawnEnemies()
     {
@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 //randomises which enemy spawns
                 int randomEnemy = Random.Range(minRangeOfEnemiesToSpawn, maxRangeOfEnemiesToSpawn);
-                //instantiates that enemy and adds it to a temp variable
+                //instantiates that enemy
                 Instantiate(enemiesToSpawn[randomEnemy], transform.position, Quaternion.identity);
                 timeBetweenSpawns = maxTimeBetweenSpawns;
             }
@@ -61,14 +61,18 @@ public class EnemySpawner : MonoBehaviour
                 {
                     //does the same as above, just that this has a spawn limit
                     int randomEnemy = Random.Range(minRangeOfEnemiesToSpawn, maxRangeOfEnemiesToSpawn);
-                    Instantiate(enemiesToSpawn[randomEnemy], transform.position, Quaternion.identity);
+                    BaseEnemy spawnedEnemy = Instantiate(enemiesToSpawn[randomEnemy], transform.position, Quaternion.identity);
+                    WaveManager.Instance.existingEnemies.Add(spawnedEnemy);
                 }
                 amountSpawnedAlready++;
                 timeBetweenSpawns = maxTimeBetweenSpawns;
             }
-            if(amountSpawnedAlready == spawnLimit)
+            if(amountSpawnedAlready == spawnLimit && !hasGiven)
             {
-                canSpawn = false;
+                print("Increase Wave Number");
+                WaveManager.Instance.IncreaseWaveNumber(count);
+                WaveManager.Instance.gameState = WaveManager.GameState.Prep;
+                hasGiven = true;
             }
         }
     }
