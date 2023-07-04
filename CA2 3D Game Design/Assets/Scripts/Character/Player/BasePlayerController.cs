@@ -15,6 +15,9 @@ public abstract class BasePlayerController : MonoBehaviour
     [Header("Camera")]
     public Camera cam;
 
+    [Header("Level")]
+    public int level = 1;
+
     //a singleton
     public static BasePlayerController Instance;
 

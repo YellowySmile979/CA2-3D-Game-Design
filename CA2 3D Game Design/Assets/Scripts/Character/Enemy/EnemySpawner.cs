@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     public int spawnLimit;
     int amountSpawnedAlready;
     public bool includeSpawnLimit;
+    public bool canSpawn = false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SpawnEnemies();
+        if(canSpawn) SpawnEnemies();
     }
     void SpawnEnemies()
     {
@@ -64,6 +65,10 @@ public class EnemySpawner : MonoBehaviour
                 }
                 amountSpawnedAlready++;
                 timeBetweenSpawns = maxTimeBetweenSpawns;
+            }
+            if(amountSpawnedAlready == spawnLimit)
+            {
+                canSpawn = false;
             }
         }
     }
