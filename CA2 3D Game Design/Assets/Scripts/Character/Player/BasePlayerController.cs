@@ -18,6 +18,9 @@ public abstract class BasePlayerController : MonoBehaviour
     [Header("Level")]
     public int level = 1;
 
+    [Header("Animator")]
+    public Animator playerAnimator, weaponAnimator;
+
     //a singleton
     public static BasePlayerController Instance;
 

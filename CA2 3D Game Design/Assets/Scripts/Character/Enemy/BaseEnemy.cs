@@ -40,6 +40,8 @@ public abstract class BaseEnemy : MonoBehaviour
         enemyHealth = enemyData.health;
 
         timeUntilNextAttack = maxTimeUntilNextAttack;
+
+        StartCoroutine(DetectObjects());
     }
 
     // Update is called once per frame
@@ -48,7 +50,6 @@ public abstract class BaseEnemy : MonoBehaviour
         Move();
         Timer();
         UpdateHealth();
-        DetectObjects();
     }
     //moves enemy in direction of player
     void Move()
@@ -85,19 +86,39 @@ public abstract class BaseEnemy : MonoBehaviour
         }
     }
     //detects the player and causes enemy to pathfind instead to the player than the target
-    void DetectObjects()
+    IEnumerator DetectObjects()
     {
-        colliders = Physics.OverlapSphere(transform.position, overlapSphereRadius, whatCanISee);
-        foreach(Collider collider in colliders)
+        while (true)
         {
-            if (collider.gameObject.GetComponentInParent<BasePlayerController>())
-            {
-                targettedObject = collider.gameObject;
+            colliders = Physics.OverlapSphere(transform.position, overlapSphereRadius, whatCanISee);
+
+            //checks to see if there are colliders within it
+            if (colliders.Length > 0) 
+            { 
+                //if there are, perform the following,
+                //check if the collider contains a portal objective, if yes, set targettedObject to that and break the loop
+                //otherwise set the targettedObject to the player if it is within
+                //if both, focus only on the portal tks to the break;
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.GetComponent<PortalObjective>())
+                    {
+                        targettedObject = collider.gameObject;
+                        break;
+                    }
+                    else if (collider.gameObject.GetComponentInParent<BasePlayerController>())
+                    {
+                        targettedObject = collider.gameObject;
+                    }
+                }
             }
-        }
-        if (colliders.Length <= 0)
-        {
-            targettedObject = FindObjectOfType<PortalObjective>().gameObject;
+            else
+            {
+                //otherwise targets the portal
+                targettedObject = FindObjectOfType<PortalObjective>().gameObject;
+            }
+
+            yield return new WaitForSeconds(1f);
         }
     }
     //checks to see if collided collider is player and enemy can attack

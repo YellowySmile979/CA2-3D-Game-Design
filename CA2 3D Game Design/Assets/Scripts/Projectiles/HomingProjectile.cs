@@ -33,7 +33,7 @@ public class HomingProjectile : BaseProjectile
     public override void ProjectileBehaviour()
     {
         //if there isnt any target, try to find another, otherwise move forward and prevent rest of code from firing
-        if (target == null || target != FindObjectOfType<BaseEnemy>())
+        if (target == null || !target.GetComponent<BaseEnemy>())
         {
             target = FindObjectOfType<BaseEnemy>();
             rb.velocity = transform.forward * projectileMoveSpeed;
