@@ -9,7 +9,8 @@ public abstract class BasePlayerController : MonoBehaviour
     public CharacterData playerData;
 
     [Header("Player")]
-    float horizontalInput, verticalInput, playerSpeed, playerHealth, playerDamage;
+    [HideInInspector] public float horizontalInput, verticalInput, playerSpeed, playerHealth, playerDamage;
+    public float maxPlayerHealth;
     public GameObject player;
 
     [Header("Camera")]
@@ -17,9 +18,11 @@ public abstract class BasePlayerController : MonoBehaviour
 
     [Header("Level")]
     public int level = 1;
+    bool hasLevelledUp = false;
 
     [Header("Animator")]
-    public Animator playerAnimator, weaponAnimator;
+    public Animator playerAnimator;
+    public Animator weaponAnimator;
 
     //a singleton
     public static BasePlayerController Instance;
@@ -35,6 +38,8 @@ public abstract class BasePlayerController : MonoBehaviour
         playerSpeed = playerData.moveSpeed;
         playerHealth = playerData.health;
         playerDamage = playerData.damage;
+
+        maxPlayerHealth = playerHealth;
 
         if (cam == null)
         {
@@ -90,5 +95,18 @@ public abstract class BasePlayerController : MonoBehaviour
             //player dies
             print("Player died");
         }
+        //sets the new health when player levels up
+        if (!hasLevelledUp)
+        {
+            maxPlayerHealth += 1;
+            hasLevelledUp = true;
+        }
+    }
+    //handles player anims
+    public void HandlePlayerAnims()
+    {
+        if (playerAnimator == null) playerAnimator = GetComponent<Animator>();
+        playerAnimator.SetFloat("MoveX", playerSpeed);
+        playerAnimator.SetFloat("MoveZ", playerSpeed);
     }
 }
