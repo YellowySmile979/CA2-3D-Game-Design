@@ -9,7 +9,8 @@ public abstract class BasePlayerController : MonoBehaviour
     public CharacterData playerData;
 
     [Header("Player")]
-    [HideInInspector] public float horizontalInput, verticalInput, playerSpeed, playerHealth, playerDamage;
+    [HideInInspector] public float horizontalInput, verticalInput;
+    public float playerSpeed, playerHealth, playerDamage;
     public float maxPlayerHealth;
     public GameObject player;
 
@@ -18,7 +19,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     [Header("Level")]
     public int level = 1;
-    bool hasLevelledUp = false;
+    bool hasLevelledUp = true;
 
     [Header("Animator")]
     public Animator playerAnimator;
@@ -30,15 +31,15 @@ public abstract class BasePlayerController : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        playerHealth = playerData.health;
+        playerSpeed = playerData.moveSpeed;
+        playerDamage = playerData.damage;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerSpeed = playerData.moveSpeed;
-        playerHealth = playerData.health;
-        playerDamage = playerData.damage;
-
         maxPlayerHealth = playerHealth;
 
         if (cam == null)

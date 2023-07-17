@@ -26,15 +26,21 @@ public class TankPlayerController : BasePlayerController
         {
             PlayerAttackAnims();
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Heal(healAmount);
+        }
     }
     //handles the player's attack animation
     void PlayerAttackAnims()
     {
+        isAttacking = true;
         if (weaponAnimator == null) weaponAnimator = GetComponentInChildren<Animator>();
-        weaponAnimator.SetBool("Attack", isAttacking);
+        weaponAnimator.SetBool("isAttacking", isAttacking);
         if(weaponAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
         {
-            hasAttacked = true;
+            isAttacking = false;
+            weaponAnimator.SetBool("isAttacking", isAttacking);
         }
     }
     //handles the tank's healing ability
