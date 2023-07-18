@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 7334173668020979476}
   - component: {fileID: 7334173668020979477}
   - component: {fileID: 7334173668020979478}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   colliders: []
+  isAttracted: 0
 --- !u!54 &7334173668020979474
 Rigidbody:
   m_ObjectHideFlags: 0

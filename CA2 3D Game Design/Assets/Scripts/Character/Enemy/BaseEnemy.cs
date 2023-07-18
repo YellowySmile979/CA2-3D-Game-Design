@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 [RequireComponent(typeof(Rigidbody))]
 public abstract class BaseEnemy : MonoBehaviour
@@ -27,6 +28,9 @@ public abstract class BaseEnemy : MonoBehaviour
     public float overlapSphereRadius = 1f;
     public LayerMask whatCanISee;
     [SerializeField] Collider[] colliders;
+
+    [Header("Related to Abilities")]
+    public bool isAttracted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -88,34 +92,50 @@ public abstract class BaseEnemy : MonoBehaviour
     //detects the player and causes enemy to pathfind instead to the player than the target
     IEnumerator DetectObjects()
     {
+        /*if (FindObjectOfType<TankPlayerController>() != null)
+        {
+            TankPlayerController tank = FindObjectOfType<TankPlayerController>();
+            if (!tank.enemyColliders.Contains(this.GetComponent<BoxCollider>()))
+            {
+                isAttracted = false;
+            }
+        }*/
+        //checks to see if enemy should be attracted to enemy
         while (true)
         {
-            colliders = Physics.OverlapSphere(transform.position, overlapSphereRadius, whatCanISee);
+            if (!isAttracted)
+            {
+                colliders = Physics.OverlapSphere(transform.position, overlapSphereRadius, whatCanISee);
 
-            //checks to see if there are colliders within it
-            if (colliders.Length > 0) 
-            { 
-                //if there are, perform the following,
-                //check if the collider contains a portal objective, if yes, set targettedObject to that and break the loop
-                //otherwise set the targettedObject to the player if it is within
-                //if both, focus only on the portal tks to the break;
-                foreach (Collider collider in colliders)
+                //checks to see if there are colliders within it
+                if (colliders.Length > 0 && !isAttracted)
                 {
-                    if (collider.GetComponent<PortalObjective>())
+                    //if there are, perform the following,
+                    //check if the collider contains a portal objective, if yes, set targettedObject to that and break the loop
+                    //otherwise set the targettedObject to the player if it is within
+                    //if both, focus only on the portal tks to the break;
+                    foreach (Collider collider in colliders)
                     {
-                        targettedObject = collider.gameObject;
-                        break;
+                        if (collider.GetComponent<PortalObjective>())
+                        {
+                            targettedObject = collider.gameObject;
+                            break;
+                        }
+                        else if (collider.gameObject.GetComponentInParent<BasePlayerController>())
+                        {
+                            targettedObject = collider.gameObject;
+                        }
                     }
-                    else if (collider.gameObject.GetComponentInParent<BasePlayerController>())
-                    {
-                        targettedObject = collider.gameObject;
-                    }
+                }
+                else
+                {
+                    //otherwise targets the portal
+                    targettedObject = FindObjectOfType<PortalObjective>().gameObject;
                 }
             }
             else
             {
-                //otherwise targets the portal
-                targettedObject = FindObjectOfType<PortalObjective>().gameObject;
+                targettedObject = FindObjectOfType<TankPlayerController>().gameObject;
             }
 
             yield return new WaitForSeconds(1f);
