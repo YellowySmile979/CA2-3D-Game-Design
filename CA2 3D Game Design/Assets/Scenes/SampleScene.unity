@@ -356,13 +356,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495958749}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.4849997, y: 0, z: -0.39999962}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 0.379, y: 0, z: 1.518}
   m_LocalScale: {x: 2.0346, y: 0.27468, z: 0.23539774}
   m_Children: []
   m_Father: {fileID: 7481606292105882538}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!65 &495958751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ BoxCollider:
   m_GameObject: {fileID: 495958749}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -459,6 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 7481606291925027299}
+  boxCollider: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,6 +991,7 @@ MonoBehaviour:
   healAmount: 0
   setWaitTimeTillNextHeal: 3
   setWaitTillNextAttract: 4
+  setAttractDuration: 2
   enemyColliders: []
   overlapSphereRadius: 10
   whatIsAnEnemy:

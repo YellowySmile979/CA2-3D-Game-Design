@@ -78,10 +78,8 @@ public abstract class BasePlayerController : MonoBehaviour
         }
     }
     //performs the attack of the player
-    public virtual void Attack()
-    {
-        
-    }
+    public abstract void Attack();
+
     //allows palyer to take damage
     public void TakeDamage(float damage)
     {
