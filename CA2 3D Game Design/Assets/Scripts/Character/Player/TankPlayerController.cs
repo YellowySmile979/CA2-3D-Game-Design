@@ -11,18 +11,24 @@ public class TankPlayerController : BasePlayerController
     [Header("Tank's Abilites: Heal")]
     public float healAmount;
     public float setWaitTimeTillNextHeal = 0.5f;
-    float waitTimeTillNextHeal;
+    public float waitTimeTillNextHeal;
+    bool canHeal = true;
 
     [Header("Tank's Abilities: Attract Enemies")]
     public float setWaitTillNextAttract = 5f;
-    float waitTillNextAttract;
+    public float waitTillNextAttract;
+    bool canAttract = true;
 
     public float setAttractDuration = 2f;
-    float attractDuration;
+    [SerializeField] float attractDuration;
     bool hasStartedAttract;
     public Collider[] enemyColliders;
     public float overlapSphereRadius = 5f;
     public LayerMask whatIsAnEnemy;
+
+    [Header("Tank's Ultimate: Paralysing Strike")]
+    public int enemiesKilled;
+    public int requiredKills= 1;
 
     void Start()
     {
@@ -36,18 +42,42 @@ public class TankPlayerController : BasePlayerController
         {
             PlayerAttackAnims();
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canHeal)
         {
             print("Heal");
-            Heal(healAmount);
             //resets the cooldown until next heal
             waitTimeTillNextHeal = setWaitTimeTillNextHeal;
+
+            Heal(healAmount);   
+            
+            //starts the display for the cooldown overlay
+            //from left to right it's, player, which ability it is, if it's ability 1, 2 or ulti
+            //type: this, (see CanvasController for which int), false if it's ability1 and true if not and do the same for rest
+            StartCoroutine(CanvasController.Instance.DisplayCooldownTime(this, 0, false, true));
+
+            //prevents the player from being able to spam the key
+            canHeal = false;
         }
-        if (Input.GetKeyDown(KeyCode.E) && waitTillNextAttract <= 0)
+        if (Input.GetKeyDown(KeyCode.E) && canAttract)
         {
             print("Attract Enemies");
             hasStartedAttract = true;
+
+            waitTillNextAttract = setWaitTillNextAttract;
+
             AttractEnemies();
+
+            //starts the display for the cooldown overlay
+            //from left to right it's, player, which ability it is, if it's ability 1 or 2
+            //type: this, (see CanvasController for which int), false if it's ability1 and true if not and do the same for rest
+            StartCoroutine(CanvasController.Instance.DisplayCooldownTime(this, 1, true, false));
+
+            //prevents player form being able to spam the key
+            canAttract = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Ultimate();
         }
     }
     //handles the player's attack animation
@@ -72,7 +102,27 @@ public class TankPlayerController : BasePlayerController
         }
         else
         {
+            StartCoroutine(HealTimer());
+        }
+    }
+    //handles timer for heal
+    IEnumerator HealTimer()
+    {        
+        bool hasCooledDown = false;
+        while (!hasCooledDown)
+        {
+            if (hasCooledDown) break;
+
             waitTimeTillNextHeal -= Time.deltaTime;
+
+            if (waitTimeTillNextHeal < 0f)
+            {
+                hasCooledDown = true;
+
+                canHeal = true;
+            }
+
+            yield return new WaitForSeconds(0.0001f);
         }
     }
     //attracts enemies for awhile
@@ -88,11 +138,29 @@ public class TankPlayerController : BasePlayerController
                     collider.GetComponent<BaseEnemy>().isAttracted = true;
                 }
             }
-            waitTillNextAttract = setWaitTillNextAttract;
         }
         else
         {
+            StartCoroutine(AttractTimer());
+        }
+    }
+    //handles the timer for attract
+    IEnumerator AttractTimer()
+    {
+        bool hasCooledDown = false;
+        while (!hasCooledDown)
+        {
+            if (hasCooledDown) break;
+
             waitTillNextAttract -= Time.deltaTime;
+
+            if (waitTillNextAttract < 0f)
+            {
+                hasCooledDown = true;
+
+                canAttract = true;
+            }
+            yield return new WaitForSeconds(0.0001f);
         }
     }
     //detects enemies
@@ -112,6 +180,27 @@ public class TankPlayerController : BasePlayerController
             hasStartedAttract = false;
         }
     }
+    //activates the ultimate and also handle the ultimate charge
+    void Ultimate()
+    {
+        //sends the info the CanvasController
+        CanvasController.Instance.UltimateCharge(enemiesKilled, this);
+
+        //checks to see if player can do ulti
+        if (enemiesKilled == requiredKills)
+        {
+            //do ultimate
+        }
+        else if (enemiesKilled > requiredKills)
+        {
+            enemiesKilled = requiredKills;
+        }
+    }
+    void EnemiesKilled(int enemiesKill)
+    {
+        enemiesKilled += enemiesKill;
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;

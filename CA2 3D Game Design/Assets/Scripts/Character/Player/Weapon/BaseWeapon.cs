@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class BaseWeapon : MonoBehaviour
 {
     public BasePlayerController playerController;
-    float damage;
+    protected float damage;
 
     public BoxCollider boxCollider;
 
@@ -26,14 +26,6 @@ public abstract class BaseWeapon : MonoBehaviour
     void HandleDamage()
     {
         damage = playerController.playerDamage;
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        //if u collide w/ enemy, deal dmg to enemy
-        if (other.GetComponent<BaseEnemy>())
-        {
-            other.GetComponent<BaseEnemy>().TakeDamage(damage);
-        }
     }
     //disables collider
     void DisableCollider()
