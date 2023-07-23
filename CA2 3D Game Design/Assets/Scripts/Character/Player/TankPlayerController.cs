@@ -75,7 +75,7 @@ public class TankPlayerController : BasePlayerController
             //prevents player form being able to spam the key
             canAttract = true;
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {
             Ultimate();
         }
@@ -183,22 +183,25 @@ public class TankPlayerController : BasePlayerController
     //activates the ultimate and also handle the ultimate charge
     void Ultimate()
     {
-        //sends the info the CanvasController
-        CanvasController.Instance.UltimateCharge(enemiesKilled, this);
+        CanvasController.Instance.ultimateTankOverlay.fillAmount = 1f;
 
         //checks to see if player can do ulti
         if (enemiesKilled == requiredKills)
         {
             //do ultimate
+            print("ULTIIII");           
         }
         else if (enemiesKilled > requiredKills)
         {
             enemiesKilled = requiredKills;
         }
     }
-    void EnemiesKilled(int enemiesKill)
+    public void EnemiesKilled(int enemiesKill)
     {
         enemiesKilled += enemiesKill;
+
+        //sends the info the CanvasController
+        CanvasController.Instance.UltimateCharge(enemiesKilled, this);
     }
 
     void OnDrawGizmos()

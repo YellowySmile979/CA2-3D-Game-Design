@@ -72,7 +72,13 @@ public abstract class BaseEnemy : MonoBehaviour
         if(enemyHealth <= 0)
         {
             print("enemy died");
+            //updates the amount of enemies killed
+            TankPlayerController tank = FindObjectOfType<TankPlayerController>();
+            tank.EnemiesKilled(1);
+
+            //removes the enemy from the list of existing enemies
             WaveManager.Instance.existingEnemies.Remove(this);
+            //enemy dies
             Destroy(gameObject);
         }
     }

@@ -58,6 +58,8 @@ public abstract class BasePlayerController : MonoBehaviour
         Attack();
         UpdateHealth();
         RotatePlayer();
+
+        CanvasController.Instance.UpdatePlayerStats(this);
     }
     //handles the player movement
     void Move()

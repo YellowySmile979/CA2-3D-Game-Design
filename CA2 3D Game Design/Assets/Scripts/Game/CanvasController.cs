@@ -13,6 +13,14 @@ public class CanvasController : MonoBehaviour
     public Image ultimateTankOverlay;
     public Image ultimateHealerOverlay;
 
+    [Header("Wave Info")]
+    public Text waveNumber;
+    public Text nextWaveTimer;
+
+    [Header("Player Stats")]
+    public Text playerLevel;
+    public Text playerHealthText;
+
     //a singleton
     public static CanvasController Instance;
 
@@ -23,13 +31,13 @@ public class CanvasController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ultimateTankOverlay.fillAmount = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateWaveInfo();
     }
     //displays cooldown time (for now its just for the tank)
     //RMB ADD PARITY WITH THE HEALER
@@ -104,11 +112,47 @@ public class CanvasController : MonoBehaviour
             }
         }
     }
+    //handles the charging of a character's ultimate based on the amount of enemies killed
     public void UltimateCharge(float enemiesKilled, BasePlayerController player)
     {
         if (player.GetComponent<TankPlayerController>())
         {
-            ultimateTankOverlay.fillAmount = enemiesKilled / player.GetComponent<TankPlayerController>().requiredKills;
+            float tankOverlayFillAmount = 1f;
+            if(ultimateTankOverlay.fillAmount > 0f)
+            {
+                tankOverlayFillAmount -= enemiesKilled / player.GetComponent<TankPlayerController>().requiredKills;
+                ultimateTankOverlay.fillAmount = tankOverlayFillAmount;
+            }
+        }
+        else if (player.GetComponent<HealerPlayerController>())
+        {
+
+        }
+    }
+    //updates the wave UI
+    public void UpdateWaveInfo()
+    {
+        //updates wave number
+        waveNumber.text = "Wave: " + WaveManager.Instance.waveNumber;
+
+        //updates next wave timer
+        if (WaveManager.Instance.gameState == WaveManager.GameState.Prep)
+        {
+            nextWaveTimer.text = "Next Wave In: " + Mathf.Round(WaveManager.Instance.waitTimeBetweenWaves);
+        }
+        else if (WaveManager.Instance.gameState == WaveManager.GameState.Combat)
+        {
+            nextWaveTimer.text = "Wave has started!";
+        }
+    }
+    //updates player level
+    public void UpdatePlayerStats(BasePlayerController player)
+    {
+        playerLevel.text = "Player 1 Level: " + WaveManager.Instance.playerLevel;
+
+        if (player.GetComponent<TankPlayerController>())
+        {
+            playerHealthText.text = "HP: " + player.GetComponent<TankPlayerController>().playerHealth;
         }
         else if (player.GetComponent<HealerPlayerController>())
         {

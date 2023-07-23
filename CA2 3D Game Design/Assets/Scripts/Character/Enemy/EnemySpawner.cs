@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Limits")]
     public int spawnLimit;
-    int amountSpawnedAlready;
+    public int amountSpawnedAlready;
     public bool includeSpawnLimit, hasGiven;
     int count = 1;
 
@@ -67,7 +67,7 @@ public class EnemySpawner : MonoBehaviour
                 amountSpawnedAlready++;
                 timeBetweenSpawns = maxTimeBetweenSpawns;
             }
-            if(amountSpawnedAlready == spawnLimit && !hasGiven)
+            if(amountSpawnedAlready >= spawnLimit && !hasGiven)
             {
                 print("Increase Wave Number");
                 WaveManager.Instance.IncreaseWaveNumber(count);

@@ -7,7 +7,7 @@ public class WaveManager : MonoBehaviour
     [Header("Wave")]
     public int waveNumber = 0;
     public float maxWaitTimeBetweenWaves;
-    [SerializeField] float waitTimeBetweenWaves;
+    public float waitTimeBetweenWaves;
     int counterr;
     bool hasFiredOnce = false;
 
@@ -71,7 +71,6 @@ public class WaveManager : MonoBehaviour
         counterr += counter;
         if (counterr == enemySpawners.Count && existingEnemies.Count <= 0)
         {
-            print("fire");
             if (!hasFiredOnce)
             {
                 waveNumber++;
@@ -102,7 +101,6 @@ public class WaveManager : MonoBehaviour
     {
         if (existingEnemies.Count <= 0)
         {
-            print("fire fire");
             if (waitTimeBetweenWaves > 0)
             {
                 waitTimeBetweenWaves -= Time.deltaTime;
@@ -113,6 +111,13 @@ public class WaveManager : MonoBehaviour
                 IncreaseWaveNumber(-count);
                 hasFiredOnce = false;
                 waitTimeBetweenWaves = maxWaitTimeBetweenWaves;
+
+                foreach(EnemySpawner enemySpawner in enemySpawners)
+                {
+                    enemySpawner.amountSpawnedAlready = 0;
+                    enemySpawner.hasGiven = false;
+                }
+
                 gameState = GameState.Combat;
             }
         }
