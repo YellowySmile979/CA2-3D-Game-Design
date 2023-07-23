@@ -21,7 +21,7 @@ public class TankPlayerController : BasePlayerController
 
     public float setAttractDuration = 2f;
     [SerializeField] float attractDuration;
-    bool hasStartedAttract;
+    [SerializeField] bool hasStartedAttract;
     public Collider[] enemyColliders;
     public float overlapSphereRadius = 5f;
     public LayerMask whatIsAnEnemy;
@@ -45,11 +45,12 @@ public class TankPlayerController : BasePlayerController
         if (Input.GetKeyDown(KeyCode.LeftShift) && canHeal)
         {
             print("Heal");
+            Heal(healAmount);
+
             //resets the cooldown until next heal
             waitTimeTillNextHeal = setWaitTimeTillNextHeal;
+            Heal(0);
 
-            Heal(healAmount);   
-            
             //starts the display for the cooldown overlay
             //from left to right it's, player, which ability it is, if it's ability 1, 2 or ulti
             //type: this, (see CanvasController for which int), false if it's ability1 and true if not and do the same for rest
@@ -63,8 +64,9 @@ public class TankPlayerController : BasePlayerController
             print("Attract Enemies");
             hasStartedAttract = true;
 
-            waitTillNextAttract = setWaitTillNextAttract;
+            AttractEnemies();
 
+            waitTillNextAttract = setWaitTillNextAttract;
             AttractEnemies();
 
             //starts the display for the cooldown overlay
@@ -77,7 +79,7 @@ public class TankPlayerController : BasePlayerController
         }
         if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {
-            Ultimate();
+            TankUltimate();
         }
     }
     //handles the player's attack animation
@@ -91,7 +93,7 @@ public class TankPlayerController : BasePlayerController
     {
         if (waitTimeTillNextHeal <= 0)
         {
-            if (playerHealth <= maxPlayerHealth)
+            if (playerHealth < maxPlayerHealth)
             {
                 playerHealth += healAmt;
             }
@@ -178,10 +180,15 @@ public class TankPlayerController : BasePlayerController
         if(attractDuration <= 0)
         {
             hasStartedAttract = false;
+            //stop attracting enemies
+            foreach (Collider collider in enemyColliders)
+            {
+                collider.GetComponent<BaseEnemy>().isAttracted = false;
+            }
         }
     }
     //activates the ultimate and also handle the ultimate charge
-    void Ultimate()
+    void TankUltimate()
     {
         CanvasController.Instance.ultimateTankOverlay.fillAmount = 1f;
 
@@ -189,7 +196,7 @@ public class TankPlayerController : BasePlayerController
         if (enemiesKilled == requiredKills)
         {
             //do ultimate
-            print("ULTIIII");           
+            print("TANK ULTIIII");           
         }
         else if (enemiesKilled > requiredKills)
         {

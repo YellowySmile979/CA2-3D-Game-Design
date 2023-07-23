@@ -64,6 +64,12 @@ public class WaveManager : MonoBehaviour
             waveNumber++;
             gameState = GameState.Combat;
         }
+        else if(gameState == GameState.Lost)
+        {
+            Time.timeScale = 0;
+            PlayerPrefs.SetInt("Level", playerLevel);
+            CanvasController.Instance.loseScreen.SetActive(true);
+        }
     }
     //increases wave number and sets the state to prep
     public void IncreaseWaveNumber(int counter = 0)

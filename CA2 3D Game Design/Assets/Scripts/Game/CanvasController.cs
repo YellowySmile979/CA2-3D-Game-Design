@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class CanvasController : MonoBehaviour
 
     [Header("Ultimate")]
     public Image ultimateTankOverlay;
-    public Image ultimateHealerOverlay;
+    public Image ultimateMageOverlay;
 
     [Header("Wave Info")]
     public Text waveNumber;
@@ -20,6 +21,10 @@ public class CanvasController : MonoBehaviour
     [Header("Player Stats")]
     public Text playerLevel;
     public Text playerHealthText;
+
+    [Header("Lose")]
+    public GameObject loseScreen;
+    public Text finalWaveReached, finalLevelReached;
 
     //a singleton
     public static CanvasController Instance;
@@ -38,6 +43,10 @@ public class CanvasController : MonoBehaviour
     void Update()
     {
         UpdateWaveInfo();
+        if(loseScreen.activeSelf == true)
+        {
+            LoseScreen();
+        }
     }
     //displays cooldown time (for now its just for the tank)
     //RMB ADD PARITY WITH THE HEALER
@@ -101,7 +110,7 @@ public class CanvasController : MonoBehaviour
                 yield return new WaitForSeconds(0.0001f);
             }
         }
-        else if (player.GetComponent<HealerPlayerController>())
+        else if (player.GetComponent<MagePlayerController>())
         {
             bool hasCooledDown = false;
             while (!hasCooledDown)
@@ -112,7 +121,7 @@ public class CanvasController : MonoBehaviour
             }
         }
     }
-    //handles the charging of a character's ultimate based on the amount of enemies killed
+    //handles the charging UI of a character's ultimate based on the amount of enemies killed
     public void UltimateCharge(float enemiesKilled, BasePlayerController player)
     {
         if (player.GetComponent<TankPlayerController>())
@@ -124,9 +133,14 @@ public class CanvasController : MonoBehaviour
                 ultimateTankOverlay.fillAmount = tankOverlayFillAmount;
             }
         }
-        else if (player.GetComponent<HealerPlayerController>())
+        else if (player.GetComponent<MagePlayerController>())
         {
-
+            float healerOverlayFillAmount = 1f;
+            if(ultimateMageOverlay.fillAmount > 0f)
+            {
+                healerOverlayFillAmount -= enemiesKilled / player.GetComponent<MagePlayerController>().requiredKills;
+                ultimateMageOverlay.fillAmount = healerOverlayFillAmount;
+            }
         }
     }
     //updates the wave UI
@@ -134,11 +148,12 @@ public class CanvasController : MonoBehaviour
     {
         //updates wave number
         waveNumber.text = "Wave: " + WaveManager.Instance.waveNumber;
+        PlayerPrefs.SetInt("Wave Number", WaveManager.Instance.waveNumber);
 
         //updates next wave timer
         if (WaveManager.Instance.gameState == WaveManager.GameState.Prep)
         {
-            nextWaveTimer.text = "Next Wave In: " + Mathf.Round(WaveManager.Instance.waitTimeBetweenWaves);
+            nextWaveTimer.text = "Next Wave In: " + Mathf.Round(WaveManager.Instance.waitTimeBetweenWaves);            
         }
         else if (WaveManager.Instance.gameState == WaveManager.GameState.Combat)
         {
@@ -154,9 +169,20 @@ public class CanvasController : MonoBehaviour
         {
             playerHealthText.text = "HP: " + player.GetComponent<TankPlayerController>().playerHealth;
         }
-        else if (player.GetComponent<HealerPlayerController>())
+        else if (player.GetComponent<MagePlayerController>())
         {
 
         }
+    }
+    //returns back to main menu
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("Start");
+    }
+    //handles lose screen
+    public void LoseScreen()
+    {
+        finalWaveReached.text = "Final Wave Reached: " + PlayerPrefs.GetInt("Wave Number");
+        finalLevelReached.text = "Final Level Reached: " + PlayerPrefs.GetInt("Level");
     }
 }

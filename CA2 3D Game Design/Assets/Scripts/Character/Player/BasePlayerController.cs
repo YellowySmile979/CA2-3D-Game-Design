@@ -34,14 +34,12 @@ public abstract class BasePlayerController : MonoBehaviour
         playerHealth = playerData.health;
         playerSpeed = playerData.moveSpeed;
         playerDamage = playerData.damage;
-
+        maxPlayerHealth = playerHealth;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        maxPlayerHealth = playerHealth;
-
         if (cam == null)
         {
             cam = FindObjectOfType<Camera>();
