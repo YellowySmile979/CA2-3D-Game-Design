@@ -18,8 +18,9 @@ public abstract class BasePlayerController : MonoBehaviour
     public Camera cam;
 
     [Header("Level")]
-    public int level = 1;
-    bool hasLevelledUp = true;
+    public float level = 1;
+    [SerializeField] float healthScaleFactor, dmgScaleFactor, speedScaleFactor;
+    public bool hasLevelledUp;
 
     [Header("Animator")]
     public Animator playerAnimator;
@@ -95,11 +96,11 @@ public abstract class BasePlayerController : MonoBehaviour
             print("Player died");
         }
         //sets the new health when player levels up
-        if (!hasLevelledUp)
+        /*if (!hasLevelledUp)
         {
             maxPlayerHealth += 1;
             hasLevelledUp = true;
-        }
+        }*/
     }
     //handles player anims
     public void HandlePlayerAnims()
@@ -107,5 +108,22 @@ public abstract class BasePlayerController : MonoBehaviour
         if (playerAnimator == null) playerAnimator = GetComponent<Animator>();
         playerAnimator.SetFloat("MoveX", playerSpeed);
         playerAnimator.SetFloat("MoveZ", playerSpeed);
+    }
+    //handles the levelling up of the player
+    public void LevelUp(float playerLevel)
+    {
+        level = playerLevel;
+
+        //increases health when player levels up by adding their health by scalefactor times level
+        playerHealth = playerHealth + (healthScaleFactor * level);
+        maxPlayerHealth = maxPlayerHealth + (healthScaleFactor * level);
+
+        //increases speed when player levels up by adding their speed by scalefactor times level
+        playerSpeed = playerSpeed + (speedScaleFactor * level);
+
+        //increases dmg when player levels up by adding their dmg by scalefactor times level
+        playerDamage = playerDamage + (dmgScaleFactor * level);
+
+        hasLevelledUp = true;
     }
 }

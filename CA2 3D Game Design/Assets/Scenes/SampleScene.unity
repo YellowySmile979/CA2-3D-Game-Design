@@ -3160,6 +3160,7 @@ MonoBehaviour:
   maxWaitTimeBetweenWaves: 10
   waitTimeBetweenWaves: 0
   enemySpawners: []
+  players: []
   gameState: 0
   playerLevel: 0
   existingEnemies: []
@@ -3286,7 +3287,7 @@ MonoBehaviour:
   ability1HealerOverlay: {fileID: 0}
   ability2HealerOverlay: {fileID: 0}
   ultimateTankOverlay: {fileID: 626380575}
-  ultimateHealerOverlay: {fileID: 0}
+  ultimateMageOverlay: {fileID: 0}
   waveNumber: {fileID: 369489727}
   nextWaveTimer: {fileID: 146510235}
   playerLevel: {fileID: 1542486482}
@@ -3546,6 +3547,10 @@ MonoBehaviour:
   player: {fileID: 7481606292105882550}
   cam: {fileID: 519420031}
   level: 1
+  healthScaleFactor: 2
+  dmgScaleFactor: 1
+  speedScaleFactor: 0
+  hasLevelledUp: 1
   playerAnimator: {fileID: 0}
   weaponAnimator: {fileID: 495958754}
   weapon: {fileID: 0}

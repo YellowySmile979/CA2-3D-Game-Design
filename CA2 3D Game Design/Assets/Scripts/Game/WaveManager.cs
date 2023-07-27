@@ -13,6 +13,9 @@ public class WaveManager : MonoBehaviour
 
     public List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
 
+    [Header("Players")]
+    public List<BasePlayerController> players = new List<BasePlayerController>();
+
     public GameState gameState;
     public enum GameState
     {
@@ -42,6 +45,8 @@ public class WaveManager : MonoBehaviour
         enemySpawners.AddRange(FindObjectsOfType<EnemySpawner>());
         existingEnemies.AddRange(FindObjectsOfType<BaseEnemy>());
 
+        players.AddRange(FindObjectsOfType<BasePlayerController>());
+
         waitTimeBetweenWaves = maxWaitTimeBetweenWaves;
         gameState = GameState.Start;
     }
@@ -57,6 +62,13 @@ public class WaveManager : MonoBehaviour
         }
         else if (gameState == GameState.Combat)
         {
+            foreach(BasePlayerController basePlayerController in players)
+            {
+                if (basePlayerController.hasLevelledUp)
+                {
+                    basePlayerController.hasLevelledUp = false;
+                }
+            }
             StartEnemySpawners();
         }
         else if (gameState == GameState.Start)
@@ -81,6 +93,15 @@ public class WaveManager : MonoBehaviour
             {
                 waveNumber++;
                 playerLevel++;
+                //levels up the player
+                foreach(BasePlayerController basePlayerController in players)
+                {
+                    if (!basePlayerController.hasLevelledUp)
+                    {
+                        basePlayerController.LevelUp(playerLevel);
+                    }
+                }
+
                 hasFiredOnce = true;
             }
             gameState = GameState.Prep;
