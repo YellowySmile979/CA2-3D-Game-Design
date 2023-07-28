@@ -8,7 +8,7 @@ public class CanvasController : MonoBehaviour
 {
     [Header("Ability")]
     public Image ability1TankOverlay;
-    public Image ability2TankOverlay, ability1HealerOverlay, ability2HealerOverlay;
+    public Image ability2TankOverlay, ability1MageOverlay, ability2MageOverlay;
 
     [Header("Ultimate")]
     public Image ultimateTankOverlay;
@@ -112,11 +112,57 @@ public class CanvasController : MonoBehaviour
         }
         else if (player.GetComponent<MagePlayerController>())
         {
-            bool hasCooledDown = false;
-            while (!hasCooledDown)
-            {
-                if (hasCooledDown) break;
+            //checks which ability to use
+            if (whichAbility == 0) ability1TankOverlay.fillAmount = 1f;
+            else if (whichAbility == 1) ability2TankOverlay.fillAmount = 1f;
 
+            bool ability1HasCooledDown = ability1, ability2HasCooledDown = ability2;
+            //to ensure the thing repeats itself until it shouldn't
+            while (!ability1HasCooledDown)
+            {
+                print("Cooldown: Mage: Ability 1");
+
+                if (ability1HasCooledDown) break;
+
+                //handles mage's 1st ability cooldown
+                if (ability1MageOverlay.fillAmount <= 1f
+                    &&
+                    player.GetComponent<MagePlayerController>().timeTillNextPlacement > 0f)
+                {
+                    //this sets the fillamount to the timer
+                    //it is divided by max time to ensure the float value is <= 1
+                    ability1TankOverlay.fillAmount = player.GetComponent<MagePlayerController>().timeTillNextPlacement / player.GetComponent<MagePlayerController>().setTimeTillNextPlacement;
+                }
+                else if (ability1MageOverlay.fillAmount <= 0f
+                    &&
+                    player.GetComponent<MagePlayerController>().timeTillNextPlacement <= 0f)
+                {
+                    ability1HasCooledDown = true;
+                }
+                yield return new WaitForSeconds(0.0001f);
+            }
+            while(!ability2HasCooledDown)
+            {
+                print("Cooldown: Mage: Ability 2");
+
+                //to prevent an infinite loop
+                if (ability2HasCooledDown) break;
+
+                //handles the tank's 2nd ability cooldown
+                if (ability2MageOverlay.fillAmount <= 1f
+                    &&
+                    player.GetComponent<MagePlayerController>().timeTillNextMeteor > 0f)
+                {
+                    //this sets the fillamount to the timer
+                    //it is divided by max time to ensure the float value is <= 1
+                    ability2MageOverlay.fillAmount = player.GetComponent<MagePlayerController>().timeTillNextMeteor / player.GetComponent<MagePlayerController>().setTimeTillNextMeteor;
+                }
+                else if (ability2MageOverlay.fillAmount <= 0f
+                    &&
+                    player.GetComponent<MagePlayerController>().timeTillNextMeteor <= 0f)
+                {
+                    ability2HasCooledDown = true;
+                }
                 yield return new WaitForSeconds(0.0001f);
             }
         }
@@ -171,7 +217,7 @@ public class CanvasController : MonoBehaviour
         }
         else if (player.GetComponent<MagePlayerController>())
         {
-
+            playerHealthText.text = "HP: " + player.GetComponent<MagePlayerController>().playerHealth;
         }
     }
     //returns back to main menu
