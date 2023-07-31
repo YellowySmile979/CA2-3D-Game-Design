@@ -17,10 +17,19 @@ public class MagePlayerController : BasePlayerController
     public float setTimeTillStartHeal, timeTillStartHeal;
 
     [Header("Mage's Ability: Area Healing")]
-    public GameObject areaOfEffect;
+    [SerializeField] Collider[] playerColliders;
+    public GameObject originAreaOfEffect;
+    public float overlapSphereRadius = 1f;
+    public LayerMask whatIsAPlayer;
+
+    public float setAreaHealingDuration = 3f;
+    [SerializeField] float areaHealingDuration;
+    [SerializeField] bool hasStartedAreaHealing;
+
     public float healAmount;
 
     public float setTimeTillNextPlacement, timeTillNextPlacement;
+    public bool canAreaHeal = true;
 
     [Header("Mage's Ability: AOE Attack")]
     public float dmgMultiplier;
@@ -38,12 +47,18 @@ public class MagePlayerController : BasePlayerController
     void Start()
     {
         timeTillStartHeal = setTimeTillStartHeal;
+
+        if(allyToRevive == null)
+        allyToRevive = FindObjectOfType<BasePlayerController>().gameObject;
     }
 
     //has been overriden with homing projectile attack
     public override void Attack()
     {
+        if (allyToRevive == this) allyToRevive = FindObjectOfType<BasePlayerController>().gameObject;
+
         PassiveHeal();
+        DetectPlayers();
 
         //sets the spawn time
         if (!hasSetTime)
@@ -64,16 +79,34 @@ public class MagePlayerController : BasePlayerController
         {
             timeTillNextSpawn -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canAreaHeal)
         {
+            print("Area Healing");
+
+            hasStartedAreaHealing = true;
+
             AreaHealing();
+
+            timeTillNextPlacement = setTimeTillNextPlacement;
+            AreaHealing();
+
+            //starts the display for the cooldown overlay
+            //from left to right it's, player, which ability it is, if it's ability 1, 2 or ulti
+            //type: this, (see CanvasController for which int), false if it's ability1 and true if not and do the same for rest
+            StartCoroutine(CanvasController.Instance.DisplayCooldownTime(this, 0, false, true));
+
+            canAreaHeal = false;
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
+            print("AOE Attack");
+
             AOEAttack();
         }
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {
+            print("Mage Ultimate");
+
             MageUltimate();
         }
     }
@@ -112,6 +145,13 @@ public class MagePlayerController : BasePlayerController
         if(timeTillNextPlacement <= 0f)
         {
             //activate the area healing part
+            if (hasStartedAreaHealing)
+            {
+                foreach(Collider collider in playerColliders)
+                {
+                    collider.GetComponent<BasePlayerController>().playerHealth += healAmount;
+                }
+            }
         }
         else
         {
@@ -131,10 +171,29 @@ public class MagePlayerController : BasePlayerController
             if (timeTillNextPlacement < 0f)
             {
                 hasCooledDown = true;
+
+                canAreaHeal = true;
             }
 
             yield return new WaitForSeconds(0.00001f);
         }       
+    }
+    //detects all players within the sphere
+    void DetectPlayers()
+    {
+        playerColliders = Physics.OverlapSphere(originAreaOfEffect.transform.position, overlapSphereRadius, whatIsAPlayer);
+        if (hasStartedAreaHealing)
+        {
+            areaHealingDuration -= Time.deltaTime;
+        }
+        else
+        {
+            areaHealingDuration = setAreaHealingDuration;
+        }
+        if (areaHealingDuration <= 0)
+        {
+            hasStartedAreaHealing = false;
+        }
     }
     //handles the AOE attack of the mage (summoning of the meteor)
     public void AOEAttack()
@@ -176,10 +235,33 @@ public class MagePlayerController : BasePlayerController
         {
             //do ultimate
             print("MAGE ULTIIII");
+
+            if(allyToRevive != null)
+            {
+                //revive ally
+            }
+            else if(allyToRevive != this)
+            {
+                //heal ally
+                allyToRevive.GetComponent<BasePlayerController>().playerHealth += healthToGive;
+            }
         }
         else if (enemiesKilled > requiredKills)
         {
             enemiesKilled = requiredKills;
         }
+    }
+    //handles the enemies killed for the ultimate
+    public void EnemiesKilled(int enemiesKill)
+    {
+        enemiesKilled += enemiesKill;
+
+        //sends the info the CanvasController
+        CanvasController.Instance.UltimateCharge(enemiesKilled, this);
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(originAreaOfEffect.transform.position, overlapSphereRadius);
     }
 }

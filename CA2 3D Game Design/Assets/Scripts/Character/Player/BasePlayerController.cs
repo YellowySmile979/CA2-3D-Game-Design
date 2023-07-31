@@ -95,6 +95,12 @@ public abstract class BasePlayerController : MonoBehaviour
             //player dies
             print("Player died");
         }
+        //helps ensure the health never exceeds the max player health
+        if (playerHealth >= maxPlayerHealth)
+        {
+            playerHealth = maxPlayerHealth;
+        }
+
         //sets the new health when player levels up
         /*if (!hasLevelledUp)
         {

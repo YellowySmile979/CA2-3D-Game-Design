@@ -28,7 +28,7 @@ public class TankPlayerController : BasePlayerController
 
     [Header("Tank's Ultimate: Paralysing Strike")]
     public int enemiesKilled;
-    public int requiredKills= 1;
+    public int requiredKills = 1;
 
     void Start()
     {
@@ -75,7 +75,7 @@ public class TankPlayerController : BasePlayerController
             StartCoroutine(CanvasController.Instance.DisplayCooldownTime(this, 1, true, false));
 
             //prevents player form being able to spam the key
-            canAttract = true;
+            canAttract = false;
         }
         if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {

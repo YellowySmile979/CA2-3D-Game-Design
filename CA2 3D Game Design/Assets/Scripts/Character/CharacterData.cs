@@ -8,4 +8,6 @@ public class CharacterData : ScriptableObject
     public float moveSpeed;
     public float damage;
     public float health;
+
+    public Sprite ability1Sprite, ability2Sprite, ultimateSprite;
 }

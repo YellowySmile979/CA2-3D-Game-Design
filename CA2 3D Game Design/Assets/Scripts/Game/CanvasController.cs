@@ -10,9 +10,16 @@ public class CanvasController : MonoBehaviour
     public Image ability1TankOverlay;
     public Image ability2TankOverlay, ability1MageOverlay, ability2MageOverlay;
 
+    public Image ability1TankImage, ability2TankImage;
+    public Image ability1MageImage, ability2MageImage;
+
+    public GameObject tankAbilityOverlay, mageAbilityOverlay, tankUltimateOverlay, mageUltimateOverlay;
+    public CharacterData tankData, mageData;
+    bool isTank;
+
     [Header("Ultimate")]
     public Image ultimateTankOverlay;
-    public Image ultimateMageOverlay;
+    public Image ultimateMageOverlay, ultimateTankImage, ultimateMageImage;
 
     [Header("Wave Info")]
     public Text waveNumber;
@@ -36,7 +43,36 @@ public class CanvasController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ultimateTankOverlay.fillAmount = 1f;
+        //if a tank does exist, isTank=true
+        if (FindObjectOfType<TankPlayerController>())
+        {
+            isTank = true;
+        }
+        //helps update the canvas accordingly
+        if(isTank)
+        {
+            tankAbilityOverlay.SetActive(true);
+            mageAbilityOverlay.SetActive(false);
+            tankUltimateOverlay.SetActive(true);
+            mageUltimateOverlay.SetActive(false);
+
+            ultimateTankOverlay.fillAmount = 1f;
+            ability1TankImage.sprite = tankData.ability1Sprite;
+            ability2TankImage.sprite = tankData.ability2Sprite;
+            ultimateTankImage.sprite = tankData.ultimateSprite;
+        }
+        if (!isTank)
+        {
+            mageAbilityOverlay.SetActive(true);
+            tankAbilityOverlay.SetActive(false);
+            mageUltimateOverlay.SetActive(true);
+            tankUltimateOverlay.SetActive(false);
+
+            ultimateMageOverlay.fillAmount = 1f;
+            ability1MageImage.sprite = mageData.ability1Sprite;
+            ability2MageImage.sprite = mageData.ability2Sprite;
+            ultimateMageImage.sprite = mageData.ultimateSprite;
+        }
     }
 
     // Update is called once per frame
@@ -113,8 +149,8 @@ public class CanvasController : MonoBehaviour
         else if (player.GetComponent<MagePlayerController>())
         {
             //checks which ability to use
-            if (whichAbility == 0) ability1TankOverlay.fillAmount = 1f;
-            else if (whichAbility == 1) ability2TankOverlay.fillAmount = 1f;
+            if (whichAbility == 0) ability1MageOverlay.fillAmount = 1f;
+            else if (whichAbility == 1) ability2MageOverlay.fillAmount = 1f;
 
             bool ability1HasCooledDown = ability1, ability2HasCooledDown = ability2;
             //to ensure the thing repeats itself until it shouldn't
@@ -131,7 +167,7 @@ public class CanvasController : MonoBehaviour
                 {
                     //this sets the fillamount to the timer
                     //it is divided by max time to ensure the float value is <= 1
-                    ability1TankOverlay.fillAmount = player.GetComponent<MagePlayerController>().timeTillNextPlacement / player.GetComponent<MagePlayerController>().setTimeTillNextPlacement;
+                    ability1MageOverlay.fillAmount = player.GetComponent<MagePlayerController>().timeTillNextPlacement / player.GetComponent<MagePlayerController>().setTimeTillNextPlacement;
                 }
                 else if (ability1MageOverlay.fillAmount <= 0f
                     &&

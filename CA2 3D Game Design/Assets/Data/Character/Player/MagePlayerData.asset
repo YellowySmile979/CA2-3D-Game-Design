@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d3bdd86c539f964ebca4b54a1489beb, type: 3}
-  m_Name: HealerPlayerData
+  m_Name: MagePlayerData
   m_EditorClassIdentifier: 
   moveSpeed: 10
   damage: 10
   health: 10
+  ability1Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  ability2Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  ultimateSprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}

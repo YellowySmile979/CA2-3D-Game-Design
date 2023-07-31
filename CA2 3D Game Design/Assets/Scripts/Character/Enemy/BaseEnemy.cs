@@ -73,8 +73,16 @@ public abstract class BaseEnemy : MonoBehaviour
         {
             print("enemy died");
             //updates the amount of enemies killed
-            TankPlayerController tank = FindObjectOfType<TankPlayerController>();
-            tank.EnemiesKilled(1);
+            if (FindObjectOfType<TankPlayerController>())
+            {
+                TankPlayerController tank = FindObjectOfType<TankPlayerController>();
+                tank.EnemiesKilled(1);
+            }
+            if (FindObjectOfType<MagePlayerController>())
+            {
+                MagePlayerController mage = FindObjectOfType<MagePlayerController>();
+                mage.EnemiesKilled(1);
+            }
 
             //removes the enemy from the list of existing enemies
             WaveManager.Instance.existingEnemies.Remove(this);
