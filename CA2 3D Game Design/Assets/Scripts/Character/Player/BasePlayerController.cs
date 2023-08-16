@@ -11,8 +11,17 @@ public abstract class BasePlayerController : MonoBehaviour
     [Header("Player")]
     [HideInInspector] public float horizontalInput, verticalInput;
     public float playerSpeed, playerHealth, playerDamage;
-    public float maxPlayerHealth;
+    public float maxPlayerHealth;    
     public GameObject player;
+    public float rotationSpeed = 200f;
+
+    public enum Player
+    {
+        Player1,
+        Player2
+    }
+
+    public Player whichPlayer;
 
     [Header("Camera")]
     public Camera cam;
@@ -51,12 +60,13 @@ public abstract class BasePlayerController : MonoBehaviour
     void Update()
     {
         //get player input
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal " + whichPlayer.ToString());
+        verticalInput = Input.GetAxis("Vertical " + whichPlayer.ToString());
         Move();
         Attack();
         UpdateHealth();
-        RotatePlayer();
+        if (whichPlayer == Player.Player1) RotatePlayerMouse();
+        else if (whichPlayer == Player.Player2) RotatePlayerJoystick();
 
         CanvasController.Instance.UpdatePlayerStats(this);
     }
@@ -67,7 +77,8 @@ public abstract class BasePlayerController : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed * verticalInput);
         transform.Translate(Vector3.right * Time.deltaTime * playerSpeed * horizontalInput);
     }
-    void RotatePlayer()
+    //handles rotation but for mouse
+    void RotatePlayerMouse()
     {
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
@@ -76,6 +87,14 @@ public abstract class BasePlayerController : MonoBehaviour
             var target = hitInfo.point;
             target.y = transform.position.y;
             player.transform.LookAt(target);            
+        }
+    }
+    //handles rotation but for a controller
+    void RotatePlayerJoystick()
+    {
+        if(Input.GetAxisRaw("Mouse X " + whichPlayer.ToString()) > 0.1)
+        {
+            player.transform.Rotate(0, Input.GetAxis("Mouse X " + whichPlayer.ToString()) * rotationSpeed * Time.deltaTime, 0);
         }
     }
     //performs the attack of the player
