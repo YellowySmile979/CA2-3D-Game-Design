@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
-    [Header("Ability")]
+    [Header("P1 Ability")]
     public Image ability1TankOverlay;
     public Image ability2TankOverlay, ability1MageOverlay, ability2MageOverlay;
 
@@ -17,7 +17,10 @@ public class CanvasController : MonoBehaviour
     public CharacterData tankData, mageData;
     bool isTank;
 
-    [Header("Ultimate")]
+    [Header("P2 Ability")]
+    public Image ability1P2TankOverlay;
+
+    [Header("P1 Ultimate")]
     public Image ultimateTankOverlay;
     public Image ultimateMageOverlay, ultimateTankImage, ultimateMageImage;
 
@@ -25,7 +28,7 @@ public class CanvasController : MonoBehaviour
     public Text waveNumber;
     public Text nextWaveTimer;
 
-    [Header("Player Stats")]
+    [Header("Player1 Stats")]
     public Text playerLevel;
     public Text playerHealthText;
 
