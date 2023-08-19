@@ -17,8 +17,8 @@ public abstract class BasePlayerController : MonoBehaviour
 
     public enum Player
     {
-        Player1,
-        Player2
+        P1,
+        P2
     }
 
     public Player whichPlayer;
@@ -65,8 +65,8 @@ public abstract class BasePlayerController : MonoBehaviour
         Move();
         Attack();
         UpdateHealth();
-        if (whichPlayer == Player.Player1) RotatePlayerMouse();
-        else if (whichPlayer == Player.Player2) RotatePlayerJoystick();
+        if (whichPlayer == Player.P1) RotatePlayerMouse();
+        else if (whichPlayer == Player.P2) RotatePlayerJoystick();
 
         CanvasController.Instance.UpdatePlayerStats(this);
     }
