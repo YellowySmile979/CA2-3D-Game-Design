@@ -38,7 +38,7 @@ public class TankPlayerController : BasePlayerController
     {
         DetectEnemies();
 
-        if (Input.GetMouseButtonDown(0) || Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1)
+        if (Input.GetMouseButtonDown(0))
         {
             PlayerAttackAnims();
         }

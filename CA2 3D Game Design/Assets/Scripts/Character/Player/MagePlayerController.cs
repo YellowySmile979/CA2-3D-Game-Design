@@ -67,7 +67,7 @@ public class MagePlayerController : BasePlayerController
             hasSetTime = true;
         }
         //checks to see if player can fire, if not then minus the time
-        if (Input.GetMouseButtonDown(0) && timeTillNextSpawn <= 0)
+        if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 1 && timeTillNextSpawn <= 0)
         {
             projectile.GetComponent<HomingProjectile>().target = FindObjectOfType<BaseEnemy>();
             projectile.GetComponent<HomingProjectile>().floor = GameObject.FindWithTag("Floor");

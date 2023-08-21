@@ -8,29 +8,42 @@ public class CanvasController : MonoBehaviour
 {
     [Header("P1 Ability")]
     public Image ability1TankOverlay;
-    public Image ability2TankOverlay, ability1MageOverlay, ability2MageOverlay;
+    public Image ability2TankOverlay;
 
-    public Image ability1TankImage, ability2TankImage;
-    public Image ability1MageImage, ability2MageImage;
+    public Image ability1TankImage, ability2TankImage;    
 
-    public GameObject tankAbilityOverlay, mageAbilityOverlay, tankUltimateOverlay, mageUltimateOverlay;
-    public CharacterData tankData, mageData;
+    public GameObject tankAbilityOverlay, tankUltimateOverlay;
+    public CharacterData tankData;
     bool isTank;
 
     [Header("P2 Ability")]
-    public Image ability1P2TankOverlay;
+    public Image ability1MageOverlay;
+    public Image ability2MageOverlay;
+
+    public Image ability1MageImage, ability2MageImage;
+
+    public GameObject mageAbilityOverlay, mageUltimateOverlay;
+
+    public CharacterData mageData;
 
     [Header("P1 Ultimate")]
     public Image ultimateTankOverlay;
-    public Image ultimateMageOverlay, ultimateTankImage, ultimateMageImage;
+    public Image ultimateTankImage;
+
+    [Header("P2 Ultimate")]
+    public Image ultimateMageOverlay, ultimateMageImage;
 
     [Header("Wave Info")]
     public Text waveNumber;
     public Text nextWaveTimer;
 
     [Header("Player1 Stats")]
-    public Text playerLevel;
-    public Text playerHealthText;
+    public Text player1Level;
+    public Text player1HealthText;
+
+    [Header("Player2 Stats")]
+    public Text player2Level;
+    public Text player2HealthText;
 
     [Header("Lose")]
     public GameObject loseScreen;
@@ -220,11 +233,11 @@ public class CanvasController : MonoBehaviour
         }
         else if (player.GetComponent<MagePlayerController>())
         {
-            float healerOverlayFillAmount = 1f;
+            float mageOverlayFillAmount = 1f;
             if(ultimateMageOverlay.fillAmount > 0f)
             {
-                healerOverlayFillAmount -= enemiesKilled / player.GetComponent<MagePlayerController>().requiredKills;
-                ultimateMageOverlay.fillAmount = healerOverlayFillAmount;
+                mageOverlayFillAmount -= enemiesKilled / player.GetComponent<MagePlayerController>().requiredKills;
+                ultimateMageOverlay.fillAmount = mageOverlayFillAmount;
             }
         }
     }
@@ -248,15 +261,16 @@ public class CanvasController : MonoBehaviour
     //updates player level
     public void UpdatePlayerStats(BasePlayerController player)
     {
-        playerLevel.text = "Player 1 Level: " + WaveManager.Instance.playerLevel;
+        player1Level.text = "Player 1 Level: " + WaveManager.Instance.playerLevel;
+        player2Level.text = "Player 2 Level: " + WaveManager.Instance.playerLevel;
 
         if (player.GetComponent<TankPlayerController>())
         {
-            playerHealthText.text = "HP: " + player.GetComponent<TankPlayerController>().playerHealth;
+            player1HealthText.text = "HP: " + player.GetComponent<TankPlayerController>().playerHealth;
         }
         else if (player.GetComponent<MagePlayerController>())
         {
-            playerHealthText.text = "HP: " + player.GetComponent<MagePlayerController>().playerHealth;
+            player2HealthText.text = "HP: " + player.GetComponent<MagePlayerController>().playerHealth;
         }
     }
     //returns back to main menu
