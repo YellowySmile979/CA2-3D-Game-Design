@@ -1409,7 +1409,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 1142, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &560486671
@@ -4217,6 +4217,7 @@ MonoBehaviour:
   mageUltimateOverlay: {fileID: 52582343}
   tankData: {fileID: 11400000, guid: 3c8e78cd51d0c474b88903be8a3163f9, type: 2}
   mageData: {fileID: 11400000, guid: d6bfff883a7ff234897c8b7c48049c8a, type: 2}
+  ability1P2TankOverlay: {fileID: 0}
   ultimateTankOverlay: {fileID: 626380575}
   ultimateMageOverlay: {fileID: 1771896202}
   ultimateTankImage: {fileID: 391431120}
