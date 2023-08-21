@@ -65,6 +65,7 @@ public abstract class BasePlayerController : MonoBehaviour
         Move();
         Attack();
         UpdateHealth();
+        //replace this with movement anims: HandlePlayerAnims()
         if (whichPlayer == Player.P1) RotatePlayerMouse();
         else if (whichPlayer == Player.P2) RotatePlayerJoystick();
 

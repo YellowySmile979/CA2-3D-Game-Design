@@ -33,10 +33,9 @@ public class MagePlayerController : BasePlayerController
 
     [Header("Mage's Ability: AOE Attack")]
     public float dmgMultiplier;
-    public GameObject meteor;
-    public Transform placeToSpawn, placeToHit;
+    public GameObject circleOfFire;
 
-    public float setTimeTillNextMeteor, timeTillNextMeteor;
+    public float setTimeTillNextFire, timeTillNextFire;
 
     [Header("Mage's Ultimate: Revive")]
     public float healthToGive;
@@ -68,8 +67,10 @@ public class MagePlayerController : BasePlayerController
             hasSetTime = true;
         }
         //checks to see if player can fire, if not then minus the time
-        if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 1 && timeTillNextSpawn <= 0)
+        if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1 && timeTillNextSpawn <= 0)
         {
+            //insert attack anim here
+
             projectile.GetComponent<HomingProjectile>().target = FindObjectOfType<BaseEnemy>();
             projectile.GetComponent<HomingProjectile>().floor = GameObject.FindWithTag("Floor");
 
@@ -80,10 +81,10 @@ public class MagePlayerController : BasePlayerController
         {
             timeTillNextSpawn -= Time.deltaTime;
         }
-        if (Input.GetAxisRaw("Fire2 " + whichPlayer.ToString()) > 1 && canAreaHeal)
+        if (Input.GetAxisRaw("Fire2 " + whichPlayer.ToString()) > 0.1 && canAreaHeal)
         {
             print("Area Healing");
-
+            //insert attack anim here
             hasStartedAreaHealing = true;
 
             AreaHealing();
@@ -98,15 +99,17 @@ public class MagePlayerController : BasePlayerController
 
             canAreaHeal = false;
         }
-        if (Input.GetAxisRaw("Fire3 " + whichPlayer.ToString()) > 1)
+        if (Input.GetAxisRaw("Fire3 " + whichPlayer.ToString()) > 0.1)
         {
             print("AOE Attack");
+            //insert attack anim here
 
             AOEAttack();
         }
-        if (Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 1 && enemiesKilled >= requiredKills)
+        if (Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1 && enemiesKilled >= requiredKills)
         {
             print("Mage Ultimate");
+            //insert attack anim here
 
             MageUltimate();
         }
@@ -199,7 +202,7 @@ public class MagePlayerController : BasePlayerController
     //handles the AOE attack of the mage (summoning of the meteor)
     public void AOEAttack()
     {
-        if(timeTillNextMeteor <= 0f)
+        if(timeTillNextFire <= 0f)
         {
             //activates the AOE attack
 
@@ -217,9 +220,9 @@ public class MagePlayerController : BasePlayerController
         {
             if (hasCooledDown) break;
 
-            timeTillNextMeteor -= Time.deltaTime;
+            timeTillNextFire -= Time.deltaTime;
 
-            if (timeTillNextMeteor < 0f)
+            if (timeTillNextFire < 0f)
             {
                 hasCooledDown = true;
             }

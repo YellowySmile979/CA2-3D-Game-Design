@@ -92,9 +92,17 @@ public class CanvasController : MonoBehaviour
         {
             LoseScreen();
         }
-        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetAxisRaw("Pause") < 0)
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetAxisRaw("Pause") > 0.1)
         {
             Pause();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            DisplayPlayer1Info();
+        }
+        if (Input.GetAxisRaw("DisplayInfo") < 0)
+        {
+            DisplayPlayer2Info();
         }
     }
     //displays cooldown time (for now its just for the tank)
@@ -200,15 +208,15 @@ public class CanvasController : MonoBehaviour
                 //handles the tank's 2nd ability cooldown
                 if (ability2MageOverlay.fillAmount <= 1f
                     &&
-                    player.GetComponent<MagePlayerController>().timeTillNextMeteor > 0f)
+                    player.GetComponent<MagePlayerController>().timeTillNextFire > 0f)
                 {
                     //this sets the fillamount to the timer
                     //it is divided by max time to ensure the float value is <= 1
-                    ability2MageOverlay.fillAmount = player.GetComponent<MagePlayerController>().timeTillNextMeteor / player.GetComponent<MagePlayerController>().setTimeTillNextMeteor;
+                    ability2MageOverlay.fillAmount = player.GetComponent<MagePlayerController>().timeTillNextFire / player.GetComponent<MagePlayerController>().setTimeTillNextFire;
                 }
                 else if (ability2MageOverlay.fillAmount <= 0f
                     &&
-                    player.GetComponent<MagePlayerController>().timeTillNextMeteor <= 0f)
+                    player.GetComponent<MagePlayerController>().timeTillNextFire <= 0f)
                 {
                     ability2HasCooledDown = true;
                 }
@@ -258,8 +266,8 @@ public class CanvasController : MonoBehaviour
     //updates player level and health
     public void UpdatePlayerStats(BasePlayerController player)
     {
-        player1Level.text = "Player 1 Level: " + WaveManager.Instance.playerLevel;
-        player2Level.text = "Player 2 Level: " + WaveManager.Instance.playerLevel;
+        player1Level.text = "Level: " + WaveManager.Instance.playerLevel;
+        player2Level.text = "Level: " + WaveManager.Instance.playerLevel;
 
         if (player.GetComponent<TankPlayerController>())
         {
@@ -294,6 +302,32 @@ public class CanvasController : MonoBehaviour
         {
             Time.timeScale = 1;
             pauseScreen.SetActive(false);
+        }
+    }
+    //displays player 1's info
+    public void DisplayPlayer1Info()
+    {
+        onOrOff1 = !onOrOff1;
+        if (onOrOff1)
+        {
+            P1Info.SetActive(true);
+        }
+        else
+        {
+            P1Info.SetActive(false);
+        }
+    }
+    //displays player 2's info
+    public void DisplayPlayer2Info()
+    {
+        onOrOff2 = !onOrOff2;
+        if (onOrOff2)
+        {
+            P2Info.SetActive(true);
+        }
+        else
+        {
+            P2Info.SetActive(false);
         }
     }
 }

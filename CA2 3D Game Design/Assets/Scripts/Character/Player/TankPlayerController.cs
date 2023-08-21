@@ -47,6 +47,8 @@ public class TankPlayerController : BasePlayerController
             print("Heal");
             Heal(healAmount);
 
+            //insert heal anim here
+
             //resets the cooldown until next heal
             waitTimeTillNextHeal = setWaitTimeTillNextHeal;
             Heal(0);
@@ -62,6 +64,7 @@ public class TankPlayerController : BasePlayerController
         if (Input.GetKeyDown(KeyCode.E) && canAttract)
         {
             print("Attract Enemies");
+            //insert anim here
             hasStartedAttract = true;
 
             AttractEnemies();
@@ -80,6 +83,7 @@ public class TankPlayerController : BasePlayerController
         if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {
             TankUltimate();
+            //insert anim here
         }
     }
     //handles the player's attack animation
