@@ -2554,7 +2554,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &955024065
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4133,8 +4133,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 426.20996, y: -65.387}
-  m_SizeDelta: {x: 487.22, y: 130.768}
+  m_AnchoredPosition: {x: 426.20996, y: -70.28204}
+  m_SizeDelta: {x: 487.22, y: 140.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1417310279
 GameObject:
@@ -5608,15 +5608,17 @@ MonoBehaviour:
   waveNumber: {fileID: 369489727}
   nextWaveTimer: {fileID: 146510235}
   player1Level: {fileID: 1542486482}
-  player1HealthText: {fileID: 1470668543}
   player1HealthIcon: {fileID: 584316821}
+  player1LevelIcon: {fileID: 0}
   player2Level: {fileID: 1497920976}
-  player2HealthText: {fileID: 388995441}
   player2HealthIcon: {fileID: 823042133}
+  player2LevelIcon: {fileID: 0}
   loseScreen: {fileID: 1242389869}
   finalWaveReached: {fileID: 1974684378}
   finalLevelReached: {fileID: 1365566472}
   pauseScreen: {fileID: 664401867}
+  P1Info: {fileID: 0}
+  P2Info: {fileID: 0}
 --- !u!1001 &1887155963
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5729,7 +5731,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1961819183
 RectTransform:
   m_ObjectHideFlags: 0

@@ -38,12 +38,10 @@ public class CanvasController : MonoBehaviour
 
     [Header("Player1 Stats")]
     public Text player1Level;
-    public Text player1HealthText;
     public Image player1HealthIcon;
 
     [Header("Player2 Stats")]
     public Text player2Level;
-    public Text player2HealthText;
     public Image player2HealthIcon;
 
     [Header("Lose")]
@@ -55,8 +53,12 @@ public class CanvasController : MonoBehaviour
     bool onOrOff;
 
     [Header("Player1 Info")]
+    public GameObject P1Info;
+    bool onOrOff1;
 
     [Header("Player2 Info")]
+    public GameObject P2Info;
+    bool onOrOff2;
 
     //a singleton
     public static CanvasController Instance;
