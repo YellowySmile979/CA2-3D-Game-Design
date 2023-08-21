@@ -14,7 +14,6 @@ public class CanvasController : MonoBehaviour
 
     public GameObject tankAbilityOverlay, tankUltimateOverlay;
     public CharacterData tankData;
-    bool isTank;
 
     [Header("P2 Ability")]
     public Image ability1MageOverlay;
@@ -59,36 +58,28 @@ public class CanvasController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //if a tank does exist, isTank=true
-        if (FindObjectOfType<TankPlayerController>())
-        {
-            isTank = true;
-        }
         //helps update the canvas accordingly
-        if(isTank)
-        {
-            tankAbilityOverlay.SetActive(true);
-            mageAbilityOverlay.SetActive(false);
-            tankUltimateOverlay.SetActive(true);
-            mageUltimateOverlay.SetActive(false);
+        //this section is for tank
+        tankAbilityOverlay.SetActive(true);
+        mageAbilityOverlay.SetActive(false);
+        tankUltimateOverlay.SetActive(true);
+        mageUltimateOverlay.SetActive(false);
 
-            ultimateTankOverlay.fillAmount = 1f;
-            ability1TankImage.sprite = tankData.ability1Sprite;
-            ability2TankImage.sprite = tankData.ability2Sprite;
-            ultimateTankImage.sprite = tankData.ultimateSprite;
-        }
-        if (!isTank)
-        {
-            mageAbilityOverlay.SetActive(true);
-            tankAbilityOverlay.SetActive(false);
-            mageUltimateOverlay.SetActive(true);
-            tankUltimateOverlay.SetActive(false);
+        ultimateTankOverlay.fillAmount = 1f;
+        ability1TankImage.sprite = tankData.ability1Sprite;
+        ability2TankImage.sprite = tankData.ability2Sprite;
+        ultimateTankImage.sprite = tankData.ultimateSprite;
+        
+        //this section is for mage
+        mageAbilityOverlay.SetActive(true);
+        tankAbilityOverlay.SetActive(false);
+        mageUltimateOverlay.SetActive(true);
+        tankUltimateOverlay.SetActive(false);
 
-            ultimateMageOverlay.fillAmount = 1f;
-            ability1MageImage.sprite = mageData.ability1Sprite;
-            ability2MageImage.sprite = mageData.ability2Sprite;
-            ultimateMageImage.sprite = mageData.ultimateSprite;
-        }
+        ultimateMageOverlay.fillAmount = 1f;
+        ability1MageImage.sprite = mageData.ability1Sprite;
+        ability2MageImage.sprite = mageData.ability2Sprite;
+        ultimateMageImage.sprite = mageData.ultimateSprite;        
     }
 
     // Update is called once per frame
