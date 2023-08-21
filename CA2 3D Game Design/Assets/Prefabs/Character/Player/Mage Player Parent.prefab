@@ -181,7 +181,7 @@ MonoBehaviour:
   maxPlayerHealth: 0
   player: {fileID: 7481606293878906766}
   rotationSpeed: 200
-  whichPlayer: 0
+  whichPlayer: 1
   cam: {fileID: 0}
   level: 1
   healthScaleFactor: 0

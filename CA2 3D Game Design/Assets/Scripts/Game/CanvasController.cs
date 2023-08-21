@@ -39,10 +39,12 @@ public class CanvasController : MonoBehaviour
     [Header("Player1 Stats")]
     public Text player1Level;
     public Text player1HealthText;
+    public Image player1HealthIcon;
 
     [Header("Player2 Stats")]
     public Text player2Level;
     public Text player2HealthText;
+    public Image player2HealthIcon;
 
     [Header("Lose")]
     public GameObject loseScreen;
@@ -68,22 +70,12 @@ public class CanvasController : MonoBehaviour
     {
         //helps update the canvas accordingly
         //this section is for tank
-        tankAbilityOverlay.SetActive(true);
-        mageAbilityOverlay.SetActive(false);
-        tankUltimateOverlay.SetActive(true);
-        mageUltimateOverlay.SetActive(false);
-
         ultimateTankOverlay.fillAmount = 1f;
         ability1TankImage.sprite = tankData.ability1Sprite;
         ability2TankImage.sprite = tankData.ability2Sprite;
         ultimateTankImage.sprite = tankData.ultimateSprite;
         
         //this section is for mage
-        mageAbilityOverlay.SetActive(true);
-        tankAbilityOverlay.SetActive(false);
-        mageUltimateOverlay.SetActive(true);
-        tankUltimateOverlay.SetActive(false);
-
         ultimateMageOverlay.fillAmount = 1f;
         ability1MageImage.sprite = mageData.ability1Sprite;
         ability2MageImage.sprite = mageData.ability2Sprite;
@@ -261,7 +253,7 @@ public class CanvasController : MonoBehaviour
             nextWaveTimer.text = "Wave has started!";
         }
     }
-    //updates player level
+    //updates player level and health
     public void UpdatePlayerStats(BasePlayerController player)
     {
         player1Level.text = "Player 1 Level: " + WaveManager.Instance.playerLevel;
@@ -269,11 +261,11 @@ public class CanvasController : MonoBehaviour
 
         if (player.GetComponent<TankPlayerController>())
         {
-            player1HealthText.text = "HP: " + player.GetComponent<TankPlayerController>().playerHealth;
+            player1HealthIcon.fillAmount = player.GetComponent<TankPlayerController>().playerHealth / player.GetComponent<TankPlayerController>().maxPlayerHealth;
         }
         else if (player.GetComponent<MagePlayerController>())
         {
-            player2HealthText.text = "HP: " + player.GetComponent<MagePlayerController>().playerHealth;
+            player2HealthIcon.fillAmount = player.GetComponent<MagePlayerController>().playerHealth / player.GetComponent<MagePlayerController>().maxPlayerHealth;
         }
     }
     //returns back to main menu
