@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27220c3153af9f746ad07fbb1c7bd193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 17091d37931e2c64e9377546fbbe5259, type: 2}
+  playerData: {fileID: 11400000, guid: d6bfff883a7ff234897c8b7c48049c8a, type: 2}
   horizontalInput: 0
   verticalInput: 0
   playerSpeed: 0
@@ -180,6 +180,8 @@ MonoBehaviour:
   playerDamage: 0
   maxPlayerHealth: 0
   player: {fileID: 7481606293878906766}
+  rotationSpeed: 200
+  whichPlayer: 0
   cam: {fileID: 0}
   level: 1
   healthScaleFactor: 0
@@ -210,6 +212,8 @@ MonoBehaviour:
   canAreaHeal: 1
   dmgMultiplier: 0
   meteor: {fileID: 0}
+  placeToSpawn: {fileID: 0}
+  placeToHit: {fileID: 0}
   setTimeTillNextMeteor: 0
   timeTillNextMeteor: 0
   healthToGive: 10

@@ -48,6 +48,14 @@ public class CanvasController : MonoBehaviour
     public GameObject loseScreen;
     public Text finalWaveReached, finalLevelReached;
 
+    [Header("Pause")]
+    public GameObject pauseScreen;
+    bool onOrOff;
+
+    [Header("Player1 Info")]
+
+    [Header("Player2 Info")]
+
     //a singleton
     public static CanvasController Instance;
 
@@ -89,6 +97,10 @@ public class CanvasController : MonoBehaviour
         if(loseScreen.activeSelf == true)
         {
             LoseScreen();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetAxisRaw("Pause") < 0)
+        {
+            Pause();
         }
     }
     //displays cooldown time (for now its just for the tank)
@@ -274,5 +286,20 @@ public class CanvasController : MonoBehaviour
     {
         finalWaveReached.text = "Final Wave Reached: " + PlayerPrefs.GetInt("Wave Number");
         finalLevelReached.text = "Final Level Reached: " + PlayerPrefs.GetInt("Level");
+    }
+    //handles the pausing of the game
+    public void Pause()
+    {
+        onOrOff = !onOrOff;
+        if (onOrOff)
+        {
+            Time.timeScale = 0;
+            pauseScreen.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pauseScreen.SetActive(false);
+        }
     }
 }

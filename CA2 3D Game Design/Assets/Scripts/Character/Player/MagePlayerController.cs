@@ -34,6 +34,7 @@ public class MagePlayerController : BasePlayerController
     [Header("Mage's Ability: AOE Attack")]
     public float dmgMultiplier;
     public GameObject meteor;
+    public Transform placeToSpawn, placeToHit;
 
     public float setTimeTillNextMeteor, timeTillNextMeteor;
 
@@ -79,7 +80,7 @@ public class MagePlayerController : BasePlayerController
         {
             timeTillNextSpawn -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canAreaHeal)
+        if (Input.GetAxisRaw("Fire2 " + whichPlayer.ToString()) > 1 && canAreaHeal)
         {
             print("Area Healing");
 
@@ -97,13 +98,13 @@ public class MagePlayerController : BasePlayerController
 
             canAreaHeal = false;
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetAxisRaw("Fire3 " + whichPlayer.ToString()) > 1)
         {
             print("AOE Attack");
 
             AOEAttack();
         }
-        if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
+        if (Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 1 && enemiesKilled >= requiredKills)
         {
             print("Mage Ultimate");
 
@@ -201,6 +202,7 @@ public class MagePlayerController : BasePlayerController
         if(timeTillNextMeteor <= 0f)
         {
             //activates the AOE attack
+
         }
         else
         {
