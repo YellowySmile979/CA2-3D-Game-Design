@@ -1820,89 +1820,6 @@ Transform:
   m_Father: {fileID: 34345492042880705}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.77394325, y: -27.699064, z: -2.716335}
---- !u!1 &7081534200524431299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7081534200524431298}
-  - component: {fileID: 7081534200524431300}
-  - component: {fileID: 7081534200524431301}
-  m_Layer: 0
-  m_Name: Camera 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7081534200524431298
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7081534200524431299}
-  m_LocalRotation: {x: 0.19235073, y: 0, z: 0, w: 0.9813263}
-  m_LocalPosition: {x: 0.02, y: 1.43, z: -1.46}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7335256209549969591}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 22.18, y: 0, z: 0}
---- !u!20 &7081534200524431300
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7081534200524431299}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0.5
-    y: 0
-    width: 0.5
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!81 &7081534200524431301
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7081534200524431299}
-  m_Enabled: 1
 --- !u!1 &7090421479658021285
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,7 +1956,8 @@ GameObject:
   - component: {fileID: 7335256209549969591}
   - component: {fileID: 7081534199171840574}
   - component: {fileID: 7081534199171840561}
-  - component: {fileID: 7081534199171840560}
+  - component: {fileID: 4222543967589053577}
+  - component: {fileID: 2849855790661174576}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -2056,11 +1974,10 @@ Transform:
   m_GameObject: {fileID: 7964545590380204557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.20155597, y: -0.00000023841858, z: 1.5902454}
-  m_LocalScale: {x: 1.2523597, y: 1.2523597, z: 1.2523597}
+  m_LocalScale: {x: 2.9804108, y: 2.9804108, z: 2.9804108}
   m_Children:
   - {fileID: 6215654284323532680}
   - {fileID: 2998344449613506595}
-  - {fileID: 7081534200524431298}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2103,7 +2020,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7081534199171840560
+--- !u!54 &4222543967589053577
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7964545590380204557}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2849855790661174576
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2112,12 +2045,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 7964545590380204557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a29f7d84a1401d40b1076b3cf785a24, type: 3}
+  m_Script: {fileID: 11500000, guid: 27220c3153af9f746ad07fbb1c7bd193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 180
-  player: 1
+  playerData: {fileID: 0}
+  horizontalInput: 0
+  verticalInput: 0
+  playerSpeed: 0
+  playerHealth: 0
+  playerDamage: 0
+  maxPlayerHealth: 0
+  player: {fileID: 0}
+  rotationSpeed: 200
+  whichPlayer: 0
+  cam: {fileID: 0}
+  level: 1
+  healthScaleFactor: 0
+  dmgScaleFactor: 0
+  speedScaleFactor: 0
+  hasLevelledUp: 0
+  playerAnimator: {fileID: 0}
+  weaponAnimator: {fileID: 0}
+  projectile: {fileID: 0}
+  instantiationPoint: {fileID: 0}
+  timeTillNextSpawn: 1
+  spawnOffset: {x: 0, y: 0, z: 0}
+  passiveHealthToHeal: 0
+  setTimeTillStartHeal: 0
+  timeTillStartHeal: 0
+  playerColliders: []
+  originAreaOfEffect: {fileID: 0}
+  overlapSphereRadius: 1
+  whatIsAPlayer:
+    serializedVersion: 2
+    m_Bits: 0
+  setAreaHealingDuration: 3
+  areaHealingDuration: 0
+  hasStartedAreaHealing: 0
+  healAmount: 0
+  setTimeTillNextPlacement: 0
+  timeTillNextPlacement: 0
+  canAreaHeal: 1
+  dmgMultiplier: 0
+  circleOfFire: {fileID: 0}
+  setTimeTillNextFire: 0
+  timeTillNextFire: 0
+  healthToGive: 0
+  allyToRevive: {fileID: 0}
+  enemiesKilled: 0
+  requiredKills: 1
 --- !u!1 &8130079874451396785
 GameObject:
   m_ObjectHideFlags: 0
