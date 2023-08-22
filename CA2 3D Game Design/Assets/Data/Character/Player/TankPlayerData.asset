@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3bdd86c539f964ebca4b54a1489beb, type: 3}
   m_Name: TankPlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 10
   damage: 5
   health: 15
   ability1Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
