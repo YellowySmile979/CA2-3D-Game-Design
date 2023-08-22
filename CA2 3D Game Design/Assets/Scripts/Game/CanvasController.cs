@@ -92,7 +92,7 @@ public class CanvasController : MonoBehaviour
         {
             LoseScreen();
         }
-        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetAxisRaw("Pause") > 0.1)
+        if(Input.GetKeyDown(KeyCode.Escape) || Input.GetAxisRaw("Pause") > 0)
         {
             Pause();
         }
