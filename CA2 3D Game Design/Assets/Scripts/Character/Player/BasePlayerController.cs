@@ -14,6 +14,7 @@ public abstract class BasePlayerController : MonoBehaviour
     public float maxPlayerHealth;    
     public GameObject player;
     public float rotationSpeed = 200f;
+    public CharacterController characterController;
 
     public enum Player
     {
@@ -45,6 +46,10 @@ public abstract class BasePlayerController : MonoBehaviour
         playerSpeed = playerData.moveSpeed;
         playerDamage = playerData.damage;
         maxPlayerHealth = playerHealth;
+        if (characterController == null)
+        {
+            characterController = GetComponent<CharacterController>();
+        }
     }
 
     // Start is called before the first frame update
@@ -54,20 +59,28 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             cam = FindObjectOfType<Camera>();
         }
+        
     }
-
+    
     // Update is called once per frame
     void Update()
     {
         //get player input
         horizontalInput = Input.GetAxis("Horizontal " + whichPlayer.ToString());
-        verticalInput = Input.GetAxis("Vertical " + whichPlayer.ToString());
-        Move();
+        verticalInput = Input.GetAxis("Vertical " + whichPlayer.ToString());       
         Attack();
         UpdateHealth();
         HandlePlayerAnims();
-        if (whichPlayer == Player.P1) RotatePlayerMouse();
-        else if (whichPlayer == Player.P2) RotatePlayerJoystick();
+        if (whichPlayer == Player.P1)
+        {
+            Move();
+            RotatePlayerMouse();
+        }
+        else if (whichPlayer == Player.P2)
+        {
+            MoveP2();
+            RotatePlayerJoystick();
+        }
 
         if (FindObjectOfType<CanvasController>()) CanvasController.Instance.UpdatePlayerStats(this);
     }
@@ -77,6 +90,17 @@ public abstract class BasePlayerController : MonoBehaviour
         //moves player
         transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed * verticalInput);
         transform.Translate(Vector3.right * Time.deltaTime * playerSpeed * horizontalInput);
+    }
+    Vector3 velocity;
+    void MoveP2()
+    {
+        //move player but for joystick
+        /*if (characterController.isGrounded) velocity = Vector3.zero;
+        else velocity += Physics.gravity * Time.deltaTime;*/
+
+        Vector3 movement = new Vector3(horizontalInput, 0, verticalInput);
+        Vector3 displacement = transform.TransformDirection(movement.normalized) * playerSpeed;
+        characterController.Move((displacement) * Time.deltaTime);
     }
     //handles rotation but for mouse
     void RotatePlayerMouse()
@@ -95,6 +119,12 @@ public abstract class BasePlayerController : MonoBehaviour
     {
         if(Input.GetAxisRaw("Mouse X " + whichPlayer.ToString()) > 0.1)
         {
+            //print("Rotate: " + Input.GetAxisRaw("Mouse X " + whichPlayer.ToString()));
+            player.transform.Rotate(0, Input.GetAxis("Mouse X " + whichPlayer.ToString()) * rotationSpeed * Time.deltaTime, 0);
+        }
+        else if(Input.GetAxisRaw("Mouse X " + whichPlayer.ToString()) < -0.1)
+        {
+            //print("Rotate: " + Input.GetAxisRaw("Mouse X " + whichPlayer.ToString()));
             player.transform.Rotate(0, Input.GetAxis("Mouse X " + whichPlayer.ToString()) * rotationSpeed * Time.deltaTime, 0);
         }
     }
