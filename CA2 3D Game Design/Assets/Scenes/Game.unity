@@ -152,7 +152,6 @@ GameObject:
   m_Component:
   - component: {fileID: 391210170}
   - component: {fileID: 391210169}
-  - component: {fileID: 391210168}
   - component: {fileID: 391210171}
   m_Layer: 0
   m_Name: Player 2 Cam
@@ -161,14 +160,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &391210168
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 391210167}
-  m_Enabled: 1
 --- !u!20 &391210169
 Camera:
   m_ObjectHideFlags: 0
@@ -671,6 +662,14 @@ PrefabInstance:
     - target: {fileID: 2849855790661174576, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
       propertyPath: playerAnimator
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2849855790661174576, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
+      propertyPath: originAreaOfEffect
+      value: 
+      objectReference: {fileID: 66019763}
+    - target: {fileID: 2849855790661174576, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
+      propertyPath: whatIsAPlayer.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4222543967589053577, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
       propertyPath: m_Mass

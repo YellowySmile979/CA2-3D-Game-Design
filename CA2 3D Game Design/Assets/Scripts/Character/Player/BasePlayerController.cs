@@ -65,11 +65,11 @@ public abstract class BasePlayerController : MonoBehaviour
         Move();
         Attack();
         UpdateHealth();
-        //replace this with movement anims: HandlePlayerAnims()
+        HandlePlayerAnims();
         if (whichPlayer == Player.P1) RotatePlayerMouse();
         else if (whichPlayer == Player.P2) RotatePlayerJoystick();
 
-        CanvasController.Instance.UpdatePlayerStats(this);
+        if (FindObjectOfType<CanvasController>()) CanvasController.Instance.UpdatePlayerStats(this);
     }
     //handles the player movement
     void Move()
@@ -132,8 +132,8 @@ public abstract class BasePlayerController : MonoBehaviour
     public void HandlePlayerAnims()
     {
         if (playerAnimator == null) playerAnimator = GetComponent<Animator>();
-        playerAnimator.SetFloat("MoveX", playerSpeed);
-        playerAnimator.SetFloat("MoveZ", playerSpeed);
+        playerAnimator.SetFloat("Move X", horizontalInput);
+        playerAnimator.SetFloat("Move Y", verticalInput);
     }
     //handles the levelling up of the player
     public void LevelUp(float playerLevel)
