@@ -69,7 +69,7 @@ public class MagePlayerController : BasePlayerController
         //checks to see if player can fire, if not then minus the time
         if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1 && timeTillNextSpawn <= 0)
         {
-            //insert attack anim here
+            playerAnimator.SetTrigger("isAttacking");
 
             projectile.GetComponent<HomingProjectile>().target = FindObjectOfType<BaseEnemy>();
             projectile.GetComponent<HomingProjectile>().floor = GameObject.FindWithTag("Floor");
@@ -84,7 +84,7 @@ public class MagePlayerController : BasePlayerController
         if (Input.GetAxisRaw("Fire2 " + whichPlayer.ToString()) > 0.1 && canAreaHeal)
         {
             print("Area Healing");
-            //insert attack anim here
+            playerAnimator.SetTrigger("ABL_Heal");
             hasStartedAreaHealing = true;
 
             AreaHealing();
@@ -102,14 +102,14 @@ public class MagePlayerController : BasePlayerController
         if (Input.GetAxisRaw("Fire3 " + whichPlayer.ToString()) > 0.1)
         {
             print("AOE Attack");
-            //insert attack anim here
+            playerAnimator.SetTrigger("ABL_Ring");
 
             AOEAttack();
         }
         if (Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1 && enemiesKilled >= requiredKills)
         {
             print("Mage Ultimate");
-            //insert attack anim here
+            playerAnimator.SetTrigger("Mage_Ult");
 
             MageUltimate();
         }

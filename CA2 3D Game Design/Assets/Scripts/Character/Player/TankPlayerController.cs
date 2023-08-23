@@ -30,6 +30,10 @@ public class TankPlayerController : BasePlayerController
     public int enemiesKilled;
     public int requiredKills = 1;
 
+
+    //sorry elijah arrange it later
+    bool playOnce = true;
+
     void Start()
     {
         attractDuration = setAttractDuration;
@@ -38,16 +42,21 @@ public class TankPlayerController : BasePlayerController
     {
         DetectEnemies();
 
-        if (Input.GetMouseButtonDown(0))
+        // to elijah: the input not working 
+        if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && playOnce == true)
         {
+            playOnce = false;
             PlayerAttackAnims();
+            Debug.Log("smth");
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) && canHeal)
         {
             print("Heal");
             Heal(healAmount);
 
-            //insert heal anim here
+            //play heal anim
+                playerAnimator.SetTrigger("ABL_Heal");
+                
 
             //resets the cooldown until next heal
             waitTimeTillNextHeal = setWaitTimeTillNextHeal;
@@ -61,10 +70,11 @@ public class TankPlayerController : BasePlayerController
             //prevents the player from being able to spam the key
             canHeal = false;
         }
+
         if (Input.GetKeyDown(KeyCode.E) && canAttract)
         {
             print("Attract Enemies");
-            //insert anim here
+            playerAnimator.SetTrigger("ABL_Attract");
             hasStartedAttract = true;
 
             AttractEnemies();
@@ -80,17 +90,21 @@ public class TankPlayerController : BasePlayerController
             //prevents player form being able to spam the key
             canAttract = false;
         }
+
         if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {
             TankUltimate();
-            //insert anim here
+            playerAnimator.SetTrigger("Tank_Ult");
         }
     }
     //handles the player's attack animation
     void PlayerAttackAnims()
     {
-        if (weaponAnimator == null) weaponAnimator = GetComponentInChildren<Animator>();
-        weaponAnimator.SetTrigger("isAttacking");
+        playerAnimator = GetComponent<Animator>();
+        Debug.Log(playerAnimator);
+        playerAnimator.SetTrigger("isAttacking");
+        Invoke("EnableAttack", 2);
+        // the 2s is the cooldown for the attack (EDIT ACCORDINGLY)
     }
     //handles the tank's healing ability
     void Heal(float healAmt)
@@ -214,6 +228,13 @@ public class TankPlayerController : BasePlayerController
         //sends the info the CanvasController
         CanvasController.Instance.UltimateCharge(enemiesKilled, this);
     }
+
+    //sorry elijah
+    void EnableAttack()
+    {
+        playOnce = true;
+    }
+
 
     void OnDrawGizmos()
     {

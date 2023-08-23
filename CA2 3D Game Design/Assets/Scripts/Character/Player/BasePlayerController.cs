@@ -34,7 +34,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     [Header("Animator")]
     public Animator playerAnimator;
-    public Animator weaponAnimator;
+   
 
     //a singleton
     public static BasePlayerController Instance;
@@ -144,6 +144,8 @@ public abstract class BasePlayerController : MonoBehaviour
         {
             //player dies
             print("Player died");
+            playerAnimator.SetBool("isDead", true);
+            
         }
         //helps ensure the health never exceeds the max player health
         if (playerHealth >= maxPlayerHealth)

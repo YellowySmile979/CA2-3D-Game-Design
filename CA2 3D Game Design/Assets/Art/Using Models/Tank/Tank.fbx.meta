@@ -112,33 +112,33 @@ ModelImporter:
     serializedVersion: 3
     human: []
     skeleton:
-    - name: Paladin WProp J Nordstrom(Clone)
+    - name: Tank(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Paladin_J_Nordstrom_Shield
-      parentName: Paladin WProp J Nordstrom(Clone)
+      parentName: Tank(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Paladin_J_Nordstrom_Sword
-      parentName: Paladin WProp J Nordstrom(Clone)
+      parentName: Tank(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Paladin_J_Nordstrom_Helmet
-      parentName: Paladin WProp J Nordstrom(Clone)
+      parentName: Tank(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Paladin_J_Nordstrom
-      parentName: Paladin WProp J Nordstrom(Clone)
+      parentName: Tank(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
-      parentName: Paladin WProp J Nordstrom(Clone)
+      parentName: Tank(Clone)
       position: {x: -0.0003429121, y: 0.95578784, z: 0.0050036493}
       rotation: {x: -4.419666e-15, y: -0.0000000048471085, z: -0.00000071926604, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -496,7 +496,7 @@ ModelImporter:
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 2
   humanoidOversampling: 1
   avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
