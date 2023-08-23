@@ -35,6 +35,7 @@ public class MagePlayerController : BasePlayerController
     [Header("Mage's Ability: AOE Attack")]
     public float dmgMultiplier;
     public GameObject circleOfFire;
+    public Transform spawnArea;
 
     public float setTimeTillNextFire, timeTillNextFire;
 

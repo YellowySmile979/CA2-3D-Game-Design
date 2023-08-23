@@ -35,18 +35,20 @@ public abstract class BasePlayerController : MonoBehaviour
     [Header("Animator")]
     public Animator playerAnimator;
     public Animator weaponAnimator;
-   
 
-    //a singleton
-    public static BasePlayerController Instance;
+    [Header("Respawn")]
+    public Transform respawnPosition;
+    public float maxTimeTillNextPlayerSpawn = 20f, timeTillNextPlayerSpawn;
+    public List<GameObject> meshesToDeactivate = new List<GameObject>();
+    protected bool canMove = true;
 
     void Awake()
     {
-        Instance = this;
         playerHealth = playerData.health;
         playerSpeed = playerData.moveSpeed;
         playerDamage = playerData.damage;
         maxPlayerHealth = playerHealth;
+        timeTillNextPlayerSpawn = maxTimeTillNextPlayerSpawn;
         if (characterController == null)
         {
             characterController = GetComponent<CharacterController>();
@@ -72,15 +74,20 @@ public abstract class BasePlayerController : MonoBehaviour
         Attack();
         UpdateHealth();
         HandlePlayerAnims();
-        if (whichPlayer == Player.P1)
+        //handles movement and rotation
+        //only allows player to move if canMove=true
+        if (canMove)
         {
-            Move();
-            RotatePlayerMouse();
-        }
-        else if (whichPlayer == Player.P2)
-        {
-            MoveP2();
-            RotatePlayerJoystick();
+            if (whichPlayer == Player.P1)
+            {
+                Move();
+                RotatePlayerMouse();
+            }
+            else if (whichPlayer == Player.P2)
+            {
+                MoveP2();
+                RotatePlayerJoystick();
+            }
         }
 
         if (FindObjectOfType<CanvasController>()) CanvasController.Instance.UpdatePlayerStats(this);
@@ -146,7 +153,30 @@ public abstract class BasePlayerController : MonoBehaviour
             //player dies
             print("Player died");
             playerAnimator.SetBool("isDead", true);
-            
+            if(timeTillNextPlayerSpawn <= 0)
+            {
+                //respawn player
+                playerHealth = maxPlayerHealth;
+                playerAnimator.SetBool("isDead", false);
+                timeTillNextPlayerSpawn = maxTimeTillNextPlayerSpawn;
+                //CanvasController.Instance.isDead = false;
+                this.gameObject.transform.position = respawnPosition.transform.position;
+                foreach (GameObject mesh in meshesToDeactivate)
+                {
+                    mesh.SetActive(true);
+                }
+                canMove = true;
+            }
+            else
+            {
+                timeTillNextPlayerSpawn -= Time.deltaTime;
+                //CanvasController.Instance.isDead = true;
+                foreach (GameObject mesh in meshesToDeactivate)
+                {
+                    mesh.SetActive(false);
+                }
+                canMove = false;
+            }
         }
         //helps ensure the health never exceeds the max player health
         if (playerHealth >= maxPlayerHealth)

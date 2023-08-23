@@ -64,6 +64,10 @@ public class CanvasController : MonoBehaviour
     public Image portalHealthIcon;
     float maxPortalHealth;
 
+    [Header("Player Death")]
+    public GameObject deathScreen;
+    [HideInInspector] public bool isDead;
+
     //a singleton
     public static CanvasController Instance;
 
@@ -345,6 +349,18 @@ public class CanvasController : MonoBehaviour
         else
         {
             P2Info.SetActive(false);
+        }
+    }
+    //handles the display of death screen UI
+    public void HandlePlayerDeathScreenUI()
+    {
+        if (isDead)
+        {
+            deathScreen.SetActive(true);
+        }
+        else
+        {
+            deathScreen.SetActive(false);
         }
     }
 }
