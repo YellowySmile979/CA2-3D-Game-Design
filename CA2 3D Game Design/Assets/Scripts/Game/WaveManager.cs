@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class WaveManager : MonoBehaviour
         Start,
         Prep,
         Combat,
-        Lost
+        Lost,
+        Win
     }
 
     [Header("Player Levelling")]
@@ -82,6 +84,14 @@ public class WaveManager : MonoBehaviour
             PlayerPrefs.SetInt("Level", playerLevel);
             CanvasController.Instance.loseScreen.SetActive(true);
         }
+        else if (gameState == GameState.Win)
+        {
+            SceneManager.LoadScene("Win");
+        }
+        if(waveNumber >= 51)
+        {
+            gameState = GameState.Win;
+        }
     }
     //increases wave number and sets the state to prep
     public void IncreaseWaveNumber(int counter = 0)
@@ -92,13 +102,17 @@ public class WaveManager : MonoBehaviour
             if (!hasFiredOnce)
             {
                 waveNumber++;
-                playerLevel++;
-                //levels up the player
-                foreach(BasePlayerController basePlayerController in players)
+                //restricts how much players can level up
+                if (waveNumber <= 20)
                 {
-                    if (!basePlayerController.hasLevelledUp)
+                    playerLevel++;
+                    //levels up the player
+                    foreach (BasePlayerController basePlayerController in players)
                     {
-                        basePlayerController.LevelUp(playerLevel);
+                        if (!basePlayerController.hasLevelledUp)
+                        {
+                            basePlayerController.LevelUp(playerLevel);
+                        }
                     }
                 }
 

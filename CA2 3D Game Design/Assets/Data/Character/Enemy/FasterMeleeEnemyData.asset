@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d3bdd86c539f964ebca4b54a1489beb, type: 3}
-  m_Name: StrongerMeleeEnemyData
+  m_Name: FasterMeleeEnemyData
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  damage: 3
-  health: 15
+  moveSpeed: 12
+  damage: 1
+  health: 5
   ability1Sprite: {fileID: 0}
   ability2Sprite: {fileID: 0}
   ultimateSprite: {fileID: 0}

@@ -46,10 +46,11 @@ MonoBehaviour:
   enemiesToSpawn:
   - {fileID: 6568051026692266807, guid: b5f495ade1f4bfd4c9679651a94daf50, type: 3}
   - {fileID: 1965901852785631391, guid: cb403993990c6ca4bae55fcdc9117a04, type: 3}
+  - {fileID: 7986959444107444915, guid: df13e6b1d20613d48b8758abf379bc0a, type: 3}
   minRangeOfEnemiesToSpawn: 0
-  maxRangeOfEnemiesToSpawn: 1
+  maxRangeOfEnemiesToSpawn: 2
   maxTimeBetweenSpawns: 10
-  spawnLimit: 3
+  spawnLimit: 5
   amountSpawnedAlready: 0
   includeSpawnLimit: 1
   hasGiven: 0

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: NormalMeleeEnemyData
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  damage: 1
+  damage: 2
   health: 10
+  ability1Sprite: {fileID: 0}
+  ability2Sprite: {fileID: 0}
+  ultimateSprite: {fileID: 0}
