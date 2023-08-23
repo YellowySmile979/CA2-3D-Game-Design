@@ -46,11 +46,22 @@ public class MagePlayerController : BasePlayerController
     public int enemiesKilled;
     public int requiredKills = 1;
 
+    public GameObject ultiBall;
+    public Transform ultiBallSpawnArea;
+    public float ultiBallMoveSpeed = 5f, maxUltiBallSummonWaitTime = 2f, ultiBallSummonWaitTime;
+    public float maxUltiBallMoveWaitTime = 2f, ultiBallMoveWaitTime;
+    [SerializeField] Transform ultiBallSpawnLocation;
+    public float maxHeightReachable = 10f;
+
+    public float waitBeforeActivateUlti = 2f;
+
     bool hasPlayed = true;
 
     void Start()
     {
         timeTillStartHeal = setTimeTillStartHeal;
+        ultiBallSummonWaitTime = maxUltiBallSummonWaitTime;
+        ultiBallMoveWaitTime = maxUltiBallMoveWaitTime;
 
         if(allyToRevive == null)
         allyToRevive = FindObjectOfType<BasePlayerController>().gameObject;
@@ -112,12 +123,19 @@ public class MagePlayerController : BasePlayerController
 
             AOEAttack();
         }
-        if (Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1 && enemiesKilled >= requiredKills)
+        if ((Input.GetKeyDown(KeyCode.L)||Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1) && enemiesKilled >= requiredKills)
         {
             print("Mage Ultimate");
-            playerAnimator.SetTrigger("Mage_Ult");
-
-            MageUltimate();
+            ultiBallSummonWaitTime = maxUltiBallSummonWaitTime;
+            ultiBallMoveWaitTime = maxUltiBallMoveWaitTime;
+            StartCoroutine(WaitToActivateUlti());
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            enemiesKilled = 10;
+            TankPlayerController tank = FindObjectOfType<TankPlayerController>();
+            tank.playerHealth = 0;
+            EnemiesKilled(0);
         }
     }
     //handles the passive trait of the healer
@@ -205,7 +223,7 @@ public class MagePlayerController : BasePlayerController
             hasStartedAreaHealing = false;
         }
     }
-    //handles the AOE attack of the mage (summoning of the meteor)
+    //handles the AOE attack of the mage (summoning of the fire)
     public void AOEAttack()
     {
         if(timeTillNextFire <= 0f)
@@ -246,15 +264,29 @@ public class MagePlayerController : BasePlayerController
         {
             //do ultimate
             print("MAGE ULTIIII");
+            TankPlayerController tank = FindObjectOfType<TankPlayerController>();
+            Transform tankCurrentPosition;
+            if(tank.meshesToDeactivate[0].activeSelf == false)
+            {
+                allyToRevive = tank.gameObject;
+            }
+            else
+            {
+                allyToRevive = this.gameObject;
+            }
 
             if(allyToRevive != null)
             {
                 //revive ally
+                tankCurrentPosition = tank.gameObject.transform;
+                tank.timeTillNextPlayerSpawn = 0f;
+                tank.transform.position = tankCurrentPosition.position;
             }
             else if(allyToRevive != this)
             {
-                //heal ally
+                //heal ally and yourself
                 allyToRevive.GetComponent<BasePlayerController>().playerHealth += healthToGive;
+                tank.playerHealth += healthToGive;
             }
         }
         else if (enemiesKilled > requiredKills)
@@ -274,6 +306,49 @@ public class MagePlayerController : BasePlayerController
     void EnableAttack()
     {
         hasPlayed = true;
+    }
+    IEnumerator WaitToActivateUlti()
+    {
+        playerAnimator.SetTrigger("Mage_Ult");
+        //waits for the mage to put her hands together
+        while(ultiBallSummonWaitTime > 0)
+        {
+            ultiBallSummonWaitTime -= Time.deltaTime;
+            if(ultiBallSummonWaitTime <= 0)
+            {
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        //summons ball
+        GameObject summonedUltiBall = Instantiate(ultiBall, ultiBallSpawnArea.transform.position, Quaternion.identity);
+        ultiBallSpawnLocation = summonedUltiBall.transform;
+
+        while(ultiBallMoveWaitTime > 0)
+        {
+            ultiBallMoveWaitTime -= Time.deltaTime;
+            if (ultiBallMoveSpeed <= 0)
+            {
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        while(summonedUltiBall.transform.position.y < ultiBallSpawnLocation.position.y + maxHeightReachable)
+        {
+            print(ultiBallSpawnLocation.position.y);
+            summonedUltiBall.transform.position += new Vector3(0, ultiBallMoveSpeed, 0) * Time.deltaTime;
+            if(summonedUltiBall.transform.position.y > ultiBallSpawnLocation.position.y + maxHeightReachable)
+            {
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(waitBeforeActivateUlti);        
+
+        MageUltimate();
     }
     void OnDrawGizmos()
     {
