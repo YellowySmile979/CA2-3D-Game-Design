@@ -65,8 +65,11 @@ public class CanvasController : MonoBehaviour
     float maxPortalHealth;
 
     [Header("Player Death")]
-    public GameObject deathScreen;
-    [HideInInspector] public bool isDead;
+    public GameObject deathScreenP1;
+    public GameObject deathScreenP2;
+    public Text P1RespawnTimer, P2RespawnTimer;
+    bool startP1Timer, startP2Timer;
+    //[HideInInspector] public bool isDead;
 
     //a singleton
     public static CanvasController Instance;
@@ -119,6 +122,15 @@ public class CanvasController : MonoBehaviour
         if (Input.GetAxisRaw("DisplayInfo") < 0)
         {
             DisplayPlayer2Info();
+        }
+
+        if (startP1Timer)
+        {
+            StartP1RespawnTimer();
+        }
+        if (startP2Timer)
+        {
+            StartP2RespawnTimer();
         }
     }
     //displays cooldown time (for now its just for the tank)
@@ -352,15 +364,46 @@ public class CanvasController : MonoBehaviour
         }
     }
     //handles the display of death screen UI
-    public void HandlePlayerDeathScreenUI()
+    public void HandlePlayerDeathScreenUI(BasePlayerController player, bool isDead)
     {
-        if (isDead)
+        //checks to see if the player is a tank or mage and activates their respective death screens and timer bools
+        if (player.GetComponent<TankPlayerController>())
         {
-            deathScreen.SetActive(true);
+            if (isDead)
+            {
+                deathScreenP1.SetActive(true);
+                startP1Timer = true;
+            }
+            else
+            {
+                deathScreenP1.SetActive(false);
+                startP1Timer = false;
+            }
         }
-        else
+        else if (player.GetComponent<MagePlayerController>())
         {
-            deathScreen.SetActive(false);
+            if (isDead)
+            {
+                deathScreenP2.SetActive(true);
+                startP2Timer = true;
+            }
+            else
+            {
+                deathScreenP2.SetActive(false);
+                startP2Timer = false;
+            }
         }
+    }
+    //handles P1 respawn timer
+    void StartP1RespawnTimer()
+    {
+        TankPlayerController tank = FindObjectOfType<TankPlayerController>();
+        P1RespawnTimer.text = "Respawn in: " + Mathf.Round(tank.timeTillNextPlayerSpawn);
+    }
+    //handles P2 respawn timer
+    void StartP2RespawnTimer()
+    {
+        MagePlayerController mage = FindObjectOfType<MagePlayerController>();
+        P2RespawnTimer.text = "Respawn in: " + Mathf.Round(mage.timeTillNextPlayerSpawn);
     }
 }

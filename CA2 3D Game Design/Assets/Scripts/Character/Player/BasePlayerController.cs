@@ -160,6 +160,7 @@ public abstract class BasePlayerController : MonoBehaviour
                 playerAnimator.SetBool("isDead", false);
                 timeTillNextPlayerSpawn = maxTimeTillNextPlayerSpawn;
                 //CanvasController.Instance.isDead = false;
+                CanvasController.Instance.HandlePlayerDeathScreenUI(this, false);
                 this.gameObject.transform.position = respawnPosition.transform.position;
                 foreach (GameObject mesh in meshesToDeactivate)
                 {
@@ -171,6 +172,7 @@ public abstract class BasePlayerController : MonoBehaviour
             {
                 timeTillNextPlayerSpawn -= Time.deltaTime;
                 //CanvasController.Instance.isDead = true;
+                CanvasController.Instance.HandlePlayerDeathScreenUI(this, true);
                 foreach (GameObject mesh in meshesToDeactivate)
                 {
                     mesh.SetActive(false);
