@@ -7,6 +7,7 @@ public class TankPlayerController : BasePlayerController
     [Header("Tank's Attack")]
     public GameObject weapon;
     [HideInInspector] public bool hasAttacked;
+    public float coolDownBetweenAttacks = 2f;
 
     [Header("Tank's Abilites: Heal")]
     public float healAmount;
@@ -30,9 +31,7 @@ public class TankPlayerController : BasePlayerController
     public int enemiesKilled;
     public int requiredKills = 1;
 
-
-    //sorry elijah arrange it later
-    bool playOnce = true;
+    bool hasPlayed = true;
 
     void Start()
     {
@@ -41,11 +40,10 @@ public class TankPlayerController : BasePlayerController
     public override void Attack()
     {
         DetectEnemies();
-
-        // to elijah: the input not working 
-        if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && playOnce == true)
+ 
+        if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && hasPlayed == true)
         {
-            playOnce = false;
+            hasPlayed = false;
             PlayerAttackAnims();
             Debug.Log("smth");
         }
@@ -103,7 +101,8 @@ public class TankPlayerController : BasePlayerController
         playerAnimator = GetComponent<Animator>();
         Debug.Log(playerAnimator);
         playerAnimator.SetTrigger("isAttacking");
-        Invoke("EnableAttack", 2);
+        weaponAnimator.SetTrigger("isAttacking");
+        Invoke("EnableAttack", coolDownBetweenAttacks);
         // the 2s is the cooldown for the attack (EDIT ACCORDINGLY)
     }
     //handles the tank's healing ability
@@ -228,14 +227,11 @@ public class TankPlayerController : BasePlayerController
         //sends the info the CanvasController
         CanvasController.Instance.UltimateCharge(enemiesKilled, this);
     }
-
-    //sorry elijah
+    //enables the attack (is invoked)
     void EnableAttack()
     {
-        playOnce = true;
+        hasPlayed = true;        
     }
-
-
     void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;

@@ -60,6 +60,10 @@ public class CanvasController : MonoBehaviour
     public GameObject P2Info;
     bool onOrOff2;
 
+    [Header("Gem Objective")]
+    public Image portalHealthIcon;
+    float maxPortalHealth;
+
     //a singleton
     public static CanvasController Instance;
 
@@ -81,13 +85,21 @@ public class CanvasController : MonoBehaviour
         ultimateMageOverlay.fillAmount = 1f;
         ability1MageImage.sprite = mageData.ability1Sprite;
         ability2MageImage.sprite = mageData.ability2Sprite;
-        ultimateMageImage.sprite = mageData.ultimateSprite;        
+        ultimateMageImage.sprite = mageData.ultimateSprite;
+
+        //sets the max portal health
+        if (FindObjectOfType<GemObjective>())
+        {
+            GemObjective gemObjective = FindObjectOfType<GemObjective>();
+            maxPortalHealth = gemObjective.portalHealth;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateWaveInfo();
+
         if(loseScreen.activeSelf == true)
         {
             LoseScreen();
@@ -277,6 +289,11 @@ public class CanvasController : MonoBehaviour
         {
             player2HealthIcon.fillAmount = player.GetComponent<MagePlayerController>().playerHealth / player.GetComponent<MagePlayerController>().maxPlayerHealth;
         }
+    }
+    //updates the UI for the portal health
+    public void UpdateGemHealth(float portalHP)
+    {
+        portalHealthIcon.fillAmount = portalHP / maxPortalHealth;
     }
     //returns back to main menu
     public void BackToMainMenu()

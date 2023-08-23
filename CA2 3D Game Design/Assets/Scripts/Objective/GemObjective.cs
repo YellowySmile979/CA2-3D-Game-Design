@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PortalObjective : MonoBehaviour
+public class GemObjective : MonoBehaviour
 {
     public float portalHealth = 100f;
 
@@ -20,6 +20,9 @@ public class PortalObjective : MonoBehaviour
     //checks to see if portal is destroyed
     public void UpdatePortalHealth()
     {
+        //updates the UI for the portal health
+        CanvasController.Instance.UpdateGemHealth(portalHealth);
+
         if (portalHealth <= 0f)
         {
             WaveManager.Instance.gameState = WaveManager.GameState.Lost;

@@ -37,7 +37,7 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        targettedObject = FindObjectOfType<PortalObjective>().gameObject;
+        targettedObject = FindObjectOfType<GemObjective>().gameObject;
 
         enemyDamage = enemyData.damage;
         enemyMoveSpeed = enemyData.moveSpeed;
@@ -130,12 +130,12 @@ public abstract class BaseEnemy : MonoBehaviour
                     //if both, focus only on the portal tks to the break;
                     foreach (Collider collider in colliders)
                     {
-                        if (collider.GetComponent<PortalObjective>())
+                        if (collider.GetComponent<GemObjective>())
                         {
                             targettedObject = collider.gameObject;
                             break;
                         }
-                        else if (collider.gameObject.GetComponentInParent<BasePlayerController>())
+                        else if (collider.gameObject.GetComponent<BasePlayerController>())
                         {
                             targettedObject = collider.gameObject;
                         }
@@ -144,7 +144,7 @@ public abstract class BaseEnemy : MonoBehaviour
                 else
                 {
                     //otherwise targets the portal
-                    targettedObject = FindObjectOfType<PortalObjective>().gameObject;
+                    targettedObject = FindObjectOfType<GemObjective>().gameObject;
                 }
             }
             else

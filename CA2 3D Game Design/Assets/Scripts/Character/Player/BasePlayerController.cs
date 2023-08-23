@@ -34,6 +34,7 @@ public abstract class BasePlayerController : MonoBehaviour
 
     [Header("Animator")]
     public Animator playerAnimator;
+    public Animator weaponAnimator;
    
 
     //a singleton
@@ -167,6 +168,7 @@ public abstract class BasePlayerController : MonoBehaviour
         playerAnimator.SetFloat("Move X", horizontalInput);
         playerAnimator.SetFloat("Move Y", verticalInput);
     }
+
     //handles the levelling up of the player
     public void LevelUp(float playerLevel)
     {
