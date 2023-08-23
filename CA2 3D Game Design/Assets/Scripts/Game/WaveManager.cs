@@ -58,7 +58,7 @@ public class WaveManager : MonoBehaviour
         {
             IncreaseWaveNumber();
             TimerTillNextWave();
-            StopEnemySpawners();
+            StartCoroutine(StopEnemySpawners());
         }
         else if (gameState == GameState.Combat)
         {
@@ -108,8 +108,9 @@ public class WaveManager : MonoBehaviour
         }
     }
     //does as name implies
-    void StopEnemySpawners()
+    IEnumerator StopEnemySpawners()
     {
+        yield return new WaitForSeconds(0.01f);
         foreach(EnemySpawner enemySpawner in enemySpawners)
         {
             enemySpawner.gameObject.SetActive(false);

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesToSpawn:
-  - {fileID: 7334173668020979475, guid: 55f0461775e5b02458d607af8f7ed010, type: 3}
+  - {fileID: 6568051026692266807, guid: b5f495ade1f4bfd4c9679651a94daf50, type: 3}
   - {fileID: 1965901852785631391, guid: cb403993990c6ca4bae55fcdc9117a04, type: 3}
   minRangeOfEnemiesToSpawn: 0
   maxRangeOfEnemiesToSpawn: 1

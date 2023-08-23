@@ -31,6 +31,10 @@ public class TankPlayerController : BasePlayerController
     public int enemiesKilled;
     public int requiredKills = 1;
 
+    public GameObject crack;
+    public Transform ultSpawnPoint;
+    public float setSummonAttackWaitTime = 3f, dmgMultiplier;
+
     bool hasPlayed = true;
 
     void Start()
@@ -41,7 +45,7 @@ public class TankPlayerController : BasePlayerController
     {
         DetectEnemies();
  
-        if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && hasPlayed == true)
+        if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && hasPlayed == true && canMove)
         {
             hasPlayed = false;
             PlayerAttackAnims();
@@ -94,6 +98,11 @@ public class TankPlayerController : BasePlayerController
             TankUltimate();
             playerAnimator.SetTrigger("Tank_Ult");
         }
+        /*if (Input.GetKeyDown(KeyCode.U))
+        {
+            enemiesKilled = 16;
+            EnemiesKilled(0);
+        }*/
     }
     //handles the player's attack animation
     void PlayerAttackAnims()
@@ -213,12 +222,20 @@ public class TankPlayerController : BasePlayerController
         if (enemiesKilled == requiredKills)
         {
             //do ultimate
-            print("TANK ULTIIII");           
+            print("TANK ULTIIII");
+
+            StartCoroutine(WaitToSummon());
         }
         else if (enemiesKilled > requiredKills)
         {
             enemiesKilled = requiredKills;
         }
+    }
+    IEnumerator WaitToSummon()
+    {
+        yield return new WaitForSeconds(setSummonAttackWaitTime);
+
+        Instantiate(crack, ultSpawnPoint.transform.position, Quaternion.identity);
     }
     public void EnemiesKilled(int enemiesKill)
     {

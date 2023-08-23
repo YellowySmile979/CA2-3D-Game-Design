@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     public int amountSpawnedAlready;
     public bool includeSpawnLimit, hasGiven;
     int count = 1;
+    static bool hasIncreased;
 
     // Start is called before the first frame update
     void Start()
@@ -70,8 +71,14 @@ public class EnemySpawner : MonoBehaviour
             if(amountSpawnedAlready >= spawnLimit && !hasGiven)
             {
                 print("Increase Wave Number");
+                hasIncreased = false;
                 WaveManager.Instance.IncreaseWaveNumber(count);
                 WaveManager.Instance.gameState = WaveManager.GameState.Prep;
+                if(WaveManager.Instance.waveNumber <= 20 && !hasIncreased)
+                {
+                    spawnLimit++;
+                    hasIncreased = true;
+                }
                 hasGiven = true;
             }
         }

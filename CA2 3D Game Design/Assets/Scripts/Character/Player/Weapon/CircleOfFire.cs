@@ -10,6 +10,7 @@ public class CircleOfFire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //updates the damage accordingly
         if (FindObjectOfType<MagePlayerController>())
         {
             MagePlayerController magePlayerController = FindObjectOfType<MagePlayerController>();

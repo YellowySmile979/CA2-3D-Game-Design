@@ -38,6 +38,7 @@ public class MagePlayerController : BasePlayerController
     public Transform spawnArea;
 
     public float setTimeTillNextFire, timeTillNextFire;
+    bool canFire = true;
 
     [Header("Mage's Ultimate: Revive")]
     public float healthToGive;
@@ -62,6 +63,7 @@ public class MagePlayerController : BasePlayerController
         timeTillStartHeal = setTimeTillStartHeal;
         ultiBallSummonWaitTime = maxUltiBallSummonWaitTime;
         ultiBallMoveWaitTime = maxUltiBallMoveWaitTime;
+        ultiBallSpawnLocation = ultiBallSpawnArea.transform;
 
         if(allyToRevive == null)
         allyToRevive = FindObjectOfType<BasePlayerController>().gameObject;
@@ -82,7 +84,7 @@ public class MagePlayerController : BasePlayerController
             hasSetTime = true;
         }
         //checks to see if player can fire, if not then minus the time
-        if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1 && timeTillNextSpawn <= 0 && hasPlayed == true)
+        if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1 && timeTillNextSpawn <= 0 && hasPlayed == true && canMove)
         {
             hasPlayed = false;
             playerAnimator.SetTrigger("isAttacking");
@@ -116,27 +118,34 @@ public class MagePlayerController : BasePlayerController
 
             canAreaHeal = false;
         }
-        if (Input.GetAxisRaw("Fire3 " + whichPlayer.ToString()) > 0.1)
+        if (Input.GetAxisRaw("Fire3 " + whichPlayer.ToString()) > 0.1 && canFire)
         {
             print("AOE Attack");
             playerAnimator.SetTrigger("ABL_Ring");
 
             AOEAttack();
+
+            timeTillNextFire = setTimeTillNextFire;
+            AOEAttack();
+
+            StartCoroutine(CanvasController.Instance.DisplayCooldownTime(this, 1, true, false));
+
+            canFire = false;
         }
-        if ((Input.GetKeyDown(KeyCode.L)||Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1) && enemiesKilled >= requiredKills)
+        if (Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1 && enemiesKilled >= requiredKills)
         {
             print("Mage Ultimate");
             ultiBallSummonWaitTime = maxUltiBallSummonWaitTime;
             ultiBallMoveWaitTime = maxUltiBallMoveWaitTime;
             StartCoroutine(WaitToActivateUlti());
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        /*if (Input.GetKeyDown(KeyCode.K))
         {
             enemiesKilled = 10;
             TankPlayerController tank = FindObjectOfType<TankPlayerController>();
             tank.playerHealth = 0;
             EnemiesKilled(0);
-        }
+        }*/
     }
     //handles the passive trait of the healer
     public void PassiveHeal()
@@ -229,7 +238,7 @@ public class MagePlayerController : BasePlayerController
         if(timeTillNextFire <= 0f)
         {
             //activates the AOE attack
-
+            Instantiate(circleOfFire, spawnArea.transform.position, Quaternion.identity);
         }
         else
         {
@@ -249,6 +258,8 @@ public class MagePlayerController : BasePlayerController
             if (timeTillNextFire < 0f)
             {
                 hasCooledDown = true;
+
+                canFire = true;
             }
 
             yield return new WaitForSeconds(0.00001f);
@@ -323,7 +334,6 @@ public class MagePlayerController : BasePlayerController
 
         //summons ball
         GameObject summonedUltiBall = Instantiate(ultiBall, ultiBallSpawnArea.transform.position, Quaternion.identity);
-        ultiBallSpawnLocation = summonedUltiBall.transform;
 
         while(ultiBallMoveWaitTime > 0)
         {

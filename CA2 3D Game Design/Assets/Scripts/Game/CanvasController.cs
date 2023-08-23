@@ -314,7 +314,8 @@ public class CanvasController : MonoBehaviour
     //returns back to main menu
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene("Start");
+        print("MOM");
+        SceneManager.LoadScene("MainMenu");
     }
     //handles lose screen
     public void LoseScreen()
