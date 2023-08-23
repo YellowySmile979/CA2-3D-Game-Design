@@ -100,8 +100,9 @@ public class MagePlayerController : BasePlayerController
         {
             timeTillNextSpawn -= Time.deltaTime;
         }
-        if (Input.GetAxisRaw("Fire2 " + whichPlayer.ToString()) > 0.1 && canAreaHeal)
+        if (Input.GetKeyDown("joystick button 4") && canAreaHeal)
         {
+            
             print("Area Healing");
             playerAnimator.SetTrigger("ABL_Heal");
             hasStartedAreaHealing = true;
@@ -118,7 +119,7 @@ public class MagePlayerController : BasePlayerController
 
             canAreaHeal = false;
         }
-        if (Input.GetAxisRaw("Fire3 " + whichPlayer.ToString()) > 0.1 && canFire)
+        if (Input.GetKeyDown("joystick button 5") && canFire)
         {
             print("AOE Attack");
             playerAnimator.SetTrigger("ABL_Ring");
