@@ -50,7 +50,7 @@ public class TankPlayerController : BasePlayerController
     {
         DetectEnemies();
  
-        if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && hasPlayed == true && canMove)
+        if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && hasPlayed == true)
         {
             hasPlayed = false;
             audioSource.PlayOneShot(baseAttackSFX);

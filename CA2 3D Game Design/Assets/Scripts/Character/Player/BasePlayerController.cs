@@ -75,7 +75,7 @@ public abstract class BasePlayerController : MonoBehaviour
         //get player input
         horizontalInput = Input.GetAxis("Horizontal " + whichPlayer.ToString());
         verticalInput = Input.GetAxis("Vertical " + whichPlayer.ToString());       
-        Attack();
+        if(canMove) Attack();
         UpdateHealth();
         HandlePlayerAnims();
         //handles movement and rotation
