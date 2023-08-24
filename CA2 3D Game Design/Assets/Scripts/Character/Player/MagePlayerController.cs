@@ -139,20 +139,20 @@ public class MagePlayerController : BasePlayerController
 
             canFire = false;
         }
-        if ((Input.GetKeyDown(KeyCode.L)||Input.GetKeyDown("joystick button 1")) && enemiesKilled >= requiredKills && !hasUltied)
+        if (Input.GetKeyDown("joystick button 1") && enemiesKilled >= requiredKills && !hasUltied)
         {
             print("Mage Ultimate");
             ultiBallSummonWaitTime = maxUltiBallSummonWaitTime;
             ultiBallMoveWaitTime = maxUltiBallMoveWaitTime;
             StartCoroutine(WaitToActivateUlti());
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        /*if (Input.GetKeyDown(KeyCode.K))
         {
             enemiesKilled = 10;
             TankPlayerController tank = FindObjectOfType<TankPlayerController>();
             tank.playerHealth = 0;
             EnemiesKilled(0);
-        }
+        }*/
     }
     //handles the passive trait of the healer
     public void PassiveHeal()

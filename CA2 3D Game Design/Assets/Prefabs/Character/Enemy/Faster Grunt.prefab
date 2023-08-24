@@ -2637,7 +2637,7 @@ MonoBehaviour:
   enemyHealth: 0
   targettedObject: {fileID: 0}
   enemy: {fileID: 7986959444107444914}
-  maxTimeUntilNextAttack: 2
+  maxTimeUntilNextAttack: 5
   timeUntilNextAttack: 0
   canAttack: 0
   overlapSphereRadius: 10
