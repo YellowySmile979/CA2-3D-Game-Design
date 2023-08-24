@@ -121,11 +121,11 @@ public class TankPlayerController : BasePlayerController
             enemiesKilled = 0;
             playerAnimator.SetTrigger("Tank_Ult");
         }
-        if (Input.GetKeyDown(KeyCode.U))
+        /*if (Input.GetKeyDown(KeyCode.U))
         {
             enemiesKilled = 16;
             EnemiesKilled(0);
-        }
+        }*/
     }
     //handles the player's attack animation
     void PlayerAttackAnims()
