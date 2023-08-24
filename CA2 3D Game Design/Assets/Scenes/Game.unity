@@ -9001,6 +9001,10 @@ PrefabInstance:
       propertyPath: respawnPosition
       value: 
       objectReference: {fileID: 211542135}
+    - target: {fileID: 1644910460419330646, guid: 5f1d65c8d5330f2419a9340b3f5f0309, type: 3}
+      propertyPath: setWaitTimeTillNextHeal
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2022917410204951048, guid: 5f1d65c8d5330f2419a9340b3f5f0309, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 25.829815

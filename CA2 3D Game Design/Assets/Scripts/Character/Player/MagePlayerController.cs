@@ -235,9 +235,6 @@ public class MagePlayerController : BasePlayerController
         if (hasStartedAreaHealing)
         {
             areaHealingDuration -= Time.deltaTime;
-
-            healRing.SetActive(false);
-            isHealing = false;
         }
         else
         {
@@ -246,6 +243,9 @@ public class MagePlayerController : BasePlayerController
         if (areaHealingDuration <= 0)
         {
             hasStartedAreaHealing = false;
+
+            healRing.SetActive(false);
+            isHealing = false;
         }
     }
     //handles the AOE attack of the mage (summoning of the fire)
