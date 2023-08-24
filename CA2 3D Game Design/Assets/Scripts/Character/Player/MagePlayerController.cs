@@ -156,13 +156,13 @@ public class MagePlayerController : BasePlayerController
             audioSource.PlayOneShot(mageUltSFX);
             StartCoroutine(WaitToActivateUlti());
         }
-        /*if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             enemiesKilled = 10;
             TankPlayerController tank = FindObjectOfType<TankPlayerController>();
             tank.playerHealth = 0;
             EnemiesKilled(0);
-        }*/
+        }
     }
     //handles the passive trait of the healer
     public void PassiveHeal()
