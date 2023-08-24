@@ -32,6 +32,9 @@ public class MagePlayerController : BasePlayerController
     public float setTimeTillNextPlacement, timeTillNextPlacement;
     public bool canAreaHeal = true;
 
+    public GameObject healRing;
+    bool isHealing;
+
     [Header("Mage's Ability: AOE Attack")]
     public float dmgMultiplier;
     public GameObject circleOfFire;
@@ -112,7 +115,8 @@ public class MagePlayerController : BasePlayerController
             audioSource.PlayOneShot(areaHealingSFX);
             playerAnimator.SetTrigger("ABL_Heal");
             hasStartedAreaHealing = true;
-
+            isHealing = true;
+            if (isHealing) healRing.SetActive(true);
             AreaHealing();
 
             timeTillNextPlacement = setTimeTillNextPlacement;
@@ -146,13 +150,13 @@ public class MagePlayerController : BasePlayerController
             ultiBallMoveWaitTime = maxUltiBallMoveWaitTime;
             StartCoroutine(WaitToActivateUlti());
         }
-        /*if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             enemiesKilled = 10;
             TankPlayerController tank = FindObjectOfType<TankPlayerController>();
             tank.playerHealth = 0;
             EnemiesKilled(0);
-        }*/
+        }
     }
     //handles the passive trait of the healer
     public void PassiveHeal()
@@ -217,6 +221,9 @@ public class MagePlayerController : BasePlayerController
                 hasCooledDown = true;
 
                 canAreaHeal = true;
+
+                healRing.SetActive(false);
+                isHealing = false;
             }
 
             yield return new WaitForSeconds(0.00001f);

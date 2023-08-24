@@ -27,6 +27,8 @@ public class TankPlayerController : BasePlayerController
     public float overlapSphereRadius = 5f;
     public LayerMask whatIsAnEnemy;
 
+    public GameObject attractVFX;
+
     [Header("Tank's Ultimate: Paralysing Strike")]
     public int enemiesKilled;
     public int requiredKills = 1;
@@ -44,7 +46,6 @@ public class TankPlayerController : BasePlayerController
     void Start()
     {
         attractDuration = setAttractDuration;
-        canAttract = false;
     }
     public override void Attack()
     {
@@ -88,6 +89,10 @@ public class TankPlayerController : BasePlayerController
 
             audioSource.PlayOneShot(attractSFX);
 
+            GameObject attractAA = Instantiate(attractVFX, transform.position, Quaternion.identity);
+            attractAA.GetComponent<AttrctVFX>().lifetime = setAttractDuration;
+            attractAA.transform.SetParent(this.transform);
+
             AttractEnemies();
 
             waitTillNextAttract = setWaitTillNextAttract;
@@ -109,11 +114,11 @@ public class TankPlayerController : BasePlayerController
             enemiesKilled = 0;
             playerAnimator.SetTrigger("Tank_Ult");
         }
-        /*if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             enemiesKilled = 16;
             EnemiesKilled(0);
-        }*/
+        }
     }
     //handles the player's attack animation
     void PlayerAttackAnims()
@@ -247,7 +252,7 @@ public class TankPlayerController : BasePlayerController
     {
         yield return new WaitForSeconds(setSummonAttackWaitTime);
 
-        Instantiate(crack, ultSpawnPoint.transform.position, Quaternion.identity);
+        Instantiate(crack, ultSpawnPoint.transform.position, Quaternion.Euler(crack.transform.localEulerAngles.x, 0, 90));
     }
     public void EnemiesKilled(int enemiesKill)
     {

@@ -1386,6 +1386,72 @@ RectTransform:
   m_AnchoredPosition: {x: 33, y: 38}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &291703221
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 66019769}
+    m_Modifications:
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054594, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054605, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_Name
+      value: Star Particle System
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397533283313054605, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+--- !u!1 &291703222 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8397533283313054605, guid: a5e41fc7bd382734284a341b4b21653d, type: 3}
+  m_PrefabInstance: {fileID: 291703221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &292004571
 GameObject:
   m_ObjectHideFlags: 0
@@ -8090,7 +8156,7 @@ MonoBehaviour:
   mageUltimateOverlay: {fileID: 265968389}
   mageData: {fileID: 11400000, guid: d6bfff883a7ff234897c8b7c48049c8a, type: 2}
   ultimateTankOverlay: {fileID: 1706676872}
-  ultimateTankImage: {fileID: 1751296770}
+  ultimateTankImage: {fileID: 1952302139}
   ultimateMageOverlay: {fileID: 648672278}
   ultimateMageImage: {fileID: 1427251577}
   waveNumber: {fileID: 1326486579}
@@ -8915,6 +8981,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 434652500}
+    - target: {fileID: 1644910460419330646, guid: 5f1d65c8d5330f2419a9340b3f5f0309, type: 3}
+      propertyPath: attractVFX
+      value: 
+      objectReference: {fileID: 5794446441777239480, guid: abb86c0a51fb37d458e4b1a58dacc22b, type: 3}
     - target: {fileID: 1644910460419330646, guid: 5f1d65c8d5330f2419a9340b3f5f0309, type: 3}
       propertyPath: healAmount
       value: 10
@@ -15165,6 +15235,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 391210169}
+    - target: {fileID: 2849855790661174576, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
+      propertyPath: healRing
+      value: 
+      objectReference: {fileID: 291703222}
     - target: {fileID: 2849855790661174576, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
       propertyPath: audioSource
       value: 
