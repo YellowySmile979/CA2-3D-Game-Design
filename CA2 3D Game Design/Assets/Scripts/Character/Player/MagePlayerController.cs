@@ -139,7 +139,7 @@ public class MagePlayerController : BasePlayerController
 
             canFire = false;
         }
-        if ((Input.GetKeyDown(KeyCode.L)||Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1) && enemiesKilled >= requiredKills && !hasUltied)
+        if ((Input.GetKeyDown(KeyCode.L)||Input.GetKeyDown("joystick button 1")) && enemiesKilled >= requiredKills && !hasUltied)
         {
             print("Mage Ultimate");
             ultiBallSummonWaitTime = maxUltiBallSummonWaitTime;
