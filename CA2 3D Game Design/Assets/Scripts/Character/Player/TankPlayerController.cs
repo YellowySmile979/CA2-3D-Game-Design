@@ -15,6 +15,9 @@ public class TankPlayerController : BasePlayerController
     public float waitTimeTillNextHeal;
     bool canHeal = true;
 
+    public GameObject selfHealVFX;
+    public Transform instantiationPoint;
+
     [Header("Tank's Abilities: Attract Enemies")]
     public float setWaitTillNextAttract = 5f;
     public float waitTillNextAttract;
@@ -66,6 +69,8 @@ public class TankPlayerController : BasePlayerController
 
             if(selfHealSFX != null)
             audioSource.PlayOneShot(selfHealSFX);
+
+            Instantiate(selfHealVFX, instantiationPoint.transform.position, Quaternion.identity);
             //play heal anim
             playerAnimator.SetTrigger("ABL_Heal");
                 
@@ -112,8 +117,6 @@ public class TankPlayerController : BasePlayerController
 
         if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {
-            if(ultiSFX != null)
-            audioSource.PlayOneShot(ultiSFX);
             TankUltimate();
             enemiesKilled = 0;
             playerAnimator.SetTrigger("Tank_Ult");
@@ -255,6 +258,8 @@ public class TankPlayerController : BasePlayerController
     IEnumerator WaitToSummon()
     {
         yield return new WaitForSeconds(setSummonAttackWaitTime);
+        if (ultiSFX != null)
+        audioSource.PlayOneShot(ultiSFX);
 
         Instantiate(crack, ultSpawnPoint.transform.position, Quaternion.Euler(crack.transform.localEulerAngles.x, 0, 90));
     }

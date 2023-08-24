@@ -65,7 +65,7 @@ public class MagePlayerController : BasePlayerController
 
     [Header("Mage specific SFX")]
     public AudioClip baseAttackSFX;
-    public AudioClip areaHealingSFX;
+    public AudioClip areaHealingSFX, aoeAttackSFX, mageUltSFX;
 
     void Start()
     {
@@ -116,6 +116,7 @@ public class MagePlayerController : BasePlayerController
             print("Area Healing");
             if(areaHealingSFX != null)
             audioSource.PlayOneShot(areaHealingSFX);
+
             playerAnimator.SetTrigger("ABL_Heal");
             hasStartedAreaHealing = true;
             isHealing = true;
@@ -136,6 +137,7 @@ public class MagePlayerController : BasePlayerController
         {
             print("AOE Attack");
             playerAnimator.SetTrigger("ABL_Ring");
+            audioSource.PlayOneShot(aoeAttackSFX);
 
             AOEAttack();
 
@@ -151,6 +153,7 @@ public class MagePlayerController : BasePlayerController
             print("Mage Ultimate");
             ultiBallSummonWaitTime = maxUltiBallSummonWaitTime;
             ultiBallMoveWaitTime = maxUltiBallMoveWaitTime;
+            audioSource.PlayOneShot(mageUltSFX);
             StartCoroutine(WaitToActivateUlti());
         }
         if (Input.GetKeyDown(KeyCode.K))
