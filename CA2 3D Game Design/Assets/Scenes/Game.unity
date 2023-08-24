@@ -8925,6 +8925,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 434652500}
     - target: {fileID: 1644910460419330646, guid: 5f1d65c8d5330f2419a9340b3f5f0309, type: 3}
+      propertyPath: healAmount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1644910460419330646, guid: 5f1d65c8d5330f2419a9340b3f5f0309, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 823060017}
+    - target: {fileID: 1644910460419330646, guid: 5f1d65c8d5330f2419a9340b3f5f0309, type: 3}
       propertyPath: respawnPosition
       value: 
       objectReference: {fileID: 211542135}
@@ -15166,6 +15174,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 391210169}
+    - target: {fileID: 2849855790661174576, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 823060017}
     - target: {fileID: 2849855790661174576, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
       propertyPath: respawnPosition
       value: 
