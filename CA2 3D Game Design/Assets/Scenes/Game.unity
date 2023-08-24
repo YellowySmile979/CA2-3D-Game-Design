@@ -2457,7 +2457,6 @@ GameObject:
   m_Component:
   - component: {fileID: 434652501}
   - component: {fileID: 434652500}
-  - component: {fileID: 434652499}
   - component: {fileID: 434652498}
   m_Layer: 0
   m_Name: Player 1 Cam
@@ -2481,14 +2480,6 @@ MonoBehaviour:
   target: {fileID: 2005591531}
   targetOffset: {x: -3, y: 11, z: -6.5}
   moveSpeed: 5
---- !u!81 &434652499
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434652497}
-  m_Enabled: 1
 --- !u!20 &434652500
 Camera:
   m_ObjectHideFlags: 0
