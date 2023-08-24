@@ -174,7 +174,8 @@ public abstract class BaseEnemy : MonoBehaviour
         }
         if (collision.gameObject.GetComponent<GemObjective>())
         {
-            
+            collision.gameObject.GetComponent<GemObjective>().TakeDamage(enemyDamage);
+            timeUntilNextAttack = maxTimeUntilNextAttack;
         }
     }
     //checks to see if collided collider is player and enemy can attack and continues to do so
@@ -183,6 +184,11 @@ public abstract class BaseEnemy : MonoBehaviour
         if (collision.gameObject.GetComponentInParent<BasePlayerController>() && canAttack)
         {
             collision.gameObject.GetComponentInParent<BasePlayerController>().TakeDamage(enemyDamage);
+            timeUntilNextAttack = maxTimeUntilNextAttack;
+        }
+        if (collision.gameObject.GetComponent<GemObjective>())
+        {
+            collision.gameObject.GetComponent<GemObjective>().TakeDamage(enemyDamage);
             timeUntilNextAttack = maxTimeUntilNextAttack;
         }
     }

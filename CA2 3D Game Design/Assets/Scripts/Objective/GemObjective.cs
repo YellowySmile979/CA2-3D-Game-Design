@@ -28,4 +28,8 @@ public class GemObjective : MonoBehaviour
             WaveManager.Instance.gameState = WaveManager.GameState.Lost;
         }
     }
+    public void TakeDamage(float dmg)
+    {
+        portalHealth -= dmg;
+    }
 }
