@@ -56,7 +56,12 @@ public class MagePlayerController : BasePlayerController
 
     public float waitBeforeActivateUlti = 2f;
 
+    bool hasUltied;
     bool hasPlayed = true;
+
+    [Header("Mage specific SFX")]
+    public AudioClip baseAttackSFX;
+    public AudioClip areaHealingSFX;
 
     void Start()
     {
@@ -72,8 +77,6 @@ public class MagePlayerController : BasePlayerController
     //has been overriden with homing projectile attack
     public override void Attack()
     {
-        if (allyToRevive == this) allyToRevive = FindObjectOfType<BasePlayerController>().gameObject;
-
         PassiveHeal();
         DetectPlayers();
 
@@ -84,9 +87,10 @@ public class MagePlayerController : BasePlayerController
             hasSetTime = true;
         }
         //checks to see if player can fire, if not then minus the time
-        if ((Input.GetKeyDown(KeyCode.K)||Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1) && timeTillNextSpawn <= 0 && hasPlayed == true && canMove)
+        if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1 && timeTillNextSpawn <= 0 && hasPlayed == true && canMove)
         {
             hasPlayed = false;
+            audioSource.PlayOneShot(baseAttackSFX);
             playerAnimator.SetTrigger("isAttacking");
             Invoke("EnableAttack", coolDownBetweenAttacks);
 
@@ -104,8 +108,8 @@ public class MagePlayerController : BasePlayerController
         }
         if (Input.GetKeyDown("joystick button 4") && canAreaHeal)
         {
-            
             print("Area Healing");
+            audioSource.PlayOneShot(areaHealingSFX);
             playerAnimator.SetTrigger("ABL_Heal");
             hasStartedAreaHealing = true;
 
@@ -135,20 +139,20 @@ public class MagePlayerController : BasePlayerController
 
             canFire = false;
         }
-        if (Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1 && enemiesKilled >= requiredKills)
+        if ((Input.GetKeyDown(KeyCode.L)||Input.GetAxisRaw("Ultimate " + whichPlayer.ToString()) > 0.1) && enemiesKilled >= requiredKills && !hasUltied)
         {
             print("Mage Ultimate");
             ultiBallSummonWaitTime = maxUltiBallSummonWaitTime;
             ultiBallMoveWaitTime = maxUltiBallMoveWaitTime;
             StartCoroutine(WaitToActivateUlti());
         }
-        /*if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             enemiesKilled = 10;
             TankPlayerController tank = FindObjectOfType<TankPlayerController>();
             tank.playerHealth = 0;
             EnemiesKilled(0);
-        }*/
+        }
     }
     //handles the passive trait of the healer
     public void PassiveHeal()
@@ -278,7 +282,7 @@ public class MagePlayerController : BasePlayerController
         {
             //do ultimate
             print("MAGE ULTIIII");
-            TankPlayerController tank = FindObjectOfType<TankPlayerController>();
+            TankPlayerController tank = FindObjectOfType<TankPlayerController>(true);
             Transform tankCurrentPosition;
             if(tank.meshesToDeactivate[0].activeSelf == false)
             {
@@ -302,6 +306,8 @@ public class MagePlayerController : BasePlayerController
                 allyToRevive.GetComponent<BasePlayerController>().playerHealth += healthToGive;
                 tank.playerHealth += healthToGive;
             }
+            hasUltied = false;
+            enemiesKilled = 0;
         }
         else if (enemiesKilled > requiredKills)
         {
@@ -324,8 +330,10 @@ public class MagePlayerController : BasePlayerController
     IEnumerator WaitToActivateUlti()
     {
         playerAnimator.SetTrigger("Mage_Ult");
+        hasUltied = true;
+        CanvasController.Instance.ultimateMageOverlay.fillAmount = 1f;
         //waits for the mage to put her hands together
-        while(ultiBallSummonWaitTime > 0)
+        while (ultiBallSummonWaitTime > 0)
         {
             ultiBallSummonWaitTime -= Time.deltaTime;
             if(ultiBallSummonWaitTime <= 0)
@@ -359,7 +367,9 @@ public class MagePlayerController : BasePlayerController
             yield return new WaitForEndOfFrame();
         }
 
-        yield return new WaitForSeconds(waitBeforeActivateUlti);        
+        yield return new WaitForSeconds(waitBeforeActivateUlti);
+
+        Destroy(summonedUltiBall);
 
         MageUltimate();
     }

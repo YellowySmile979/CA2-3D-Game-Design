@@ -42,6 +42,10 @@ public abstract class BasePlayerController : MonoBehaviour
     public List<GameObject> meshesToDeactivate = new List<GameObject>();
     protected bool canMove = true;
 
+    [Header("SFX")]
+    public AudioSource audioSource;
+    public AudioClip walkingSFX;
+
     void Awake()
     {
         playerHealth = playerData.health;
@@ -87,6 +91,10 @@ public abstract class BasePlayerController : MonoBehaviour
             {
                 MoveP2();
                 RotatePlayerJoystick();
+            }
+            if(horizontalInput != 0 && verticalInput != 0)
+            {
+                audioSource.PlayOneShot(walkingSFX);
             }
         }
 

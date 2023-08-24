@@ -37,6 +37,10 @@ public class TankPlayerController : BasePlayerController
 
     bool hasPlayed = true;
 
+    [Header("Tank specific SFX")]
+    public AudioClip baseAttackSFX;
+    public AudioClip selfHealSFX, attractSFX, ultiSFX;
+
     void Start()
     {
         attractDuration = setAttractDuration;
@@ -49,6 +53,7 @@ public class TankPlayerController : BasePlayerController
         if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && hasPlayed == true && canMove)
         {
             hasPlayed = false;
+            audioSource.PlayOneShot(baseAttackSFX);
             PlayerAttackAnims();
             Debug.Log("smth");
         }
@@ -57,8 +62,9 @@ public class TankPlayerController : BasePlayerController
             print("Heal");
             Heal(healAmount);
 
+            audioSource.PlayOneShot(selfHealSFX);
             //play heal anim
-                playerAnimator.SetTrigger("ABL_Heal");
+            playerAnimator.SetTrigger("ABL_Heal");
                 
 
             //resets the cooldown until next heal
@@ -80,6 +86,8 @@ public class TankPlayerController : BasePlayerController
             playerAnimator.SetTrigger("ABL_Attract");
             hasStartedAttract = true;
 
+            audioSource.PlayOneShot(attractSFX);
+
             AttractEnemies();
 
             waitTillNextAttract = setWaitTillNextAttract;
@@ -96,7 +104,9 @@ public class TankPlayerController : BasePlayerController
 
         if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {
+            audioSource.PlayOneShot(ultiSFX);
             TankUltimate();
+            enemiesKilled = 0;
             playerAnimator.SetTrigger("Tank_Ult");
         }
         /*if (Input.GetKeyDown(KeyCode.U))
