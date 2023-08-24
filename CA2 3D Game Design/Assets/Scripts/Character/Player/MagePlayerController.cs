@@ -84,16 +84,18 @@ public class MagePlayerController : BasePlayerController
             hasSetTime = true;
         }
         //checks to see if player can fire, if not then minus the time
-        if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1 && timeTillNextSpawn <= 0 && hasPlayed == true && canMove)
+        if ((Input.GetKeyDown(KeyCode.K)||Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1) && timeTillNextSpawn <= 0 && hasPlayed == true && canMove)
         {
             hasPlayed = false;
             playerAnimator.SetTrigger("isAttacking");
             Invoke("EnableAttack", coolDownBetweenAttacks);
 
-            projectile.GetComponent<HomingProjectile>().target = FindObjectOfType<BaseEnemy>();
+            
             projectile.GetComponent<HomingProjectile>().floor = GameObject.FindWithTag("Floor");
 
             Instantiate(projectile, instantiationPoint.transform.position + spawnOffset, Quaternion.identity);
+            projectile.GetComponent<HomingProjectile>().target = FindObjectOfType<BaseEnemy>();
+
             timeTillNextSpawn = setTime;
         }
         else if (timeTillNextSpawn > 0)
