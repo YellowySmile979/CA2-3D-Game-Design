@@ -77,7 +77,6 @@ public abstract class BasePlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical " + whichPlayer.ToString());       
         if(canMove) Attack();
         UpdateHealth();
-        CanvasController.Instance.UpdatePlayerStats(this);
         HandlePlayerAnims();
         //handles movement and rotation
         //only allows player to move if canMove=true
@@ -154,6 +153,8 @@ public abstract class BasePlayerController : MonoBehaviour
     //updates the health of the player
     public void UpdateHealth()
     {
+        CanvasController.Instance.UpdatePlayerStats(this);
+
         //print("Player Health: " + playerHealth);
         if (playerHealth <= 0)
         {
