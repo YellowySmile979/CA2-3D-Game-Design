@@ -223,9 +223,6 @@ public class MagePlayerController : BasePlayerController
                 hasCooledDown = true;
 
                 canAreaHeal = true;
-
-                healRing.SetActive(false);
-                isHealing = false;
             }
 
             yield return new WaitForSeconds(0.00001f);
@@ -238,6 +235,9 @@ public class MagePlayerController : BasePlayerController
         if (hasStartedAreaHealing)
         {
             areaHealingDuration -= Time.deltaTime;
+
+            healRing.SetActive(false);
+            isHealing = false;
         }
         else
         {
