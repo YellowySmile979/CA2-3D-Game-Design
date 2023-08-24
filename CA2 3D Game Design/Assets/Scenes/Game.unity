@@ -15176,7 +15176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2849855790661174576, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
       propertyPath: coolDownBetweenAttacks
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7335256209549969591, guid: 50202f55963fa77408a142f18eb6582d, type: 3}
       propertyPath: m_RootOrder

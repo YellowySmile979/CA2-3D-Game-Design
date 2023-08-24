@@ -98,7 +98,7 @@ public abstract class BasePlayerController : MonoBehaviour
             }
         }
 
-        if (FindObjectOfType<CanvasController>()) CanvasController.Instance.UpdatePlayerStats(this);
+        CanvasController.Instance.UpdatePlayerStats(this);
     }
     //handles the player movement
     void Move()
