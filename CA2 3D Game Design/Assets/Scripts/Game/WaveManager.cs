@@ -7,6 +7,7 @@ public class WaveManager : MonoBehaviour
 {
     [Header("Wave")]
     public int waveNumber = 0;
+    public int maxWaves = 26;
     public float maxWaitTimeBetweenWaves;
     public float waitTimeBetweenWaves;
     int counterr;
@@ -88,7 +89,7 @@ public class WaveManager : MonoBehaviour
         {
             SceneManager.LoadScene("Win");
         }
-        if(waveNumber >= 26)
+        if(waveNumber >= maxWaves)
         {
             gameState = GameState.Win;
         }

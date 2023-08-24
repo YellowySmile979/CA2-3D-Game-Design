@@ -1162,7 +1162,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: af4bd38db050a084aaa4f20a5d376b52, type: 3}
-    m_FontSize: 189
+    m_FontSize: 169
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -1173,7 +1173,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mystic
+  m_Text: Mystique
 --- !u!222 &1455270850
 CanvasRenderer:
   m_ObjectHideFlags: 0

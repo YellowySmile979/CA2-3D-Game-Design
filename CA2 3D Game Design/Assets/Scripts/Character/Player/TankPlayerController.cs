@@ -243,16 +243,12 @@ public class TankPlayerController : BasePlayerController
         CanvasController.Instance.ultimateTankOverlay.fillAmount = 1f;
 
         //checks to see if player can do ulti
-        if (enemiesKilled == requiredKills)
+        if (enemiesKilled >= requiredKills)
         {
             //do ultimate
             print("TANK ULTIIII");
 
             StartCoroutine(WaitToSummon());
-        }
-        else if (enemiesKilled > requiredKills)
-        {
-            enemiesKilled = requiredKills;
         }
     }
     IEnumerator WaitToSummon()

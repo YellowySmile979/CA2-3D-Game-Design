@@ -290,7 +290,7 @@ public class MagePlayerController : BasePlayerController
         CanvasController.Instance.ultimateMageOverlay.fillAmount = 1f;
 
         //checks to see if player can do ulti
-        if (enemiesKilled == requiredKills)
+        if (enemiesKilled >= requiredKills)
         {
             //do ultimate
             print("MAGE ULTIIII");
@@ -320,10 +320,6 @@ public class MagePlayerController : BasePlayerController
             }
             hasUltied = false;
             enemiesKilled = 0;
-        }
-        else if (enemiesKilled > requiredKills)
-        {
-            enemiesKilled = requiredKills;
         }
     }
     //handles the enemies killed for the ultimate
