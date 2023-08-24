@@ -165,7 +165,7 @@ public abstract class BaseEnemy : MonoBehaviour
         }
     }
     //checks to see if collided collider is player and enemy can attack
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.GetComponentInParent<BasePlayerController>() && canAttack)
         {
@@ -179,7 +179,7 @@ public abstract class BaseEnemy : MonoBehaviour
         }
     }
     //checks to see if collided collider is player and enemy can attack and continues to do so
-    void OnCollisionStay(Collision collision)
+    void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.GetComponentInParent<BasePlayerController>() && canAttack)
         {
