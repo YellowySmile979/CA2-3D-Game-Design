@@ -15,6 +15,6 @@ MonoBehaviour:
   moveSpeed: 10
   damage: 10
   health: 10
-  ability1Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  ability2Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  ultimateSprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  ability1Sprite: {fileID: -3272184696137876264, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}
+  ability2Sprite: {fileID: -4540553022140704257, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}
+  ultimateSprite: {fileID: 5886820993961067050, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}
