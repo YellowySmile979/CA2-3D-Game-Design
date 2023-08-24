@@ -445,7 +445,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 80b9bc585f50c304281f75f061620796, type: 3}
     m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
@@ -457,7 +457,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Sound Effects: \n"
+  m_Text: "Sounds:\nAll sounds are from Pixabay\n- The Final Boss Battle.MP3\n- The
+    Game Loop _19.mp3\n\nAssets:\nMost Models are from Mixamo\n'Walking' from SketchFab\n\nCave/Spawner:
+    \n- Low Poly Rock Cave by Adrian21\n\nAll UI assets are drawn\n"
 --- !u!222 &1074278219
 CanvasRenderer:
   m_ObjectHideFlags: 0
