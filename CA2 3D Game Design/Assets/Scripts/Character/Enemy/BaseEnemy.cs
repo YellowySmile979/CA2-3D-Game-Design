@@ -167,9 +167,13 @@ public abstract class BaseEnemy : MonoBehaviour
     //checks to see if collided collider is player and enemy can attack
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.GetComponentInParent<BasePlayerController>() && canAttack)
+        if (collision.gameObject.GetComponent<BasePlayerController>() && canAttack)
         {
-            collision.gameObject.GetComponentInParent<BasePlayerController>().TakeDamage(enemyDamage);
+            collision.gameObject.GetComponent<BasePlayerController>().TakeDamage(enemyDamage);
+            if (collision.gameObject.GetComponent<MagePlayerController>())
+            {
+                collision.gameObject.GetComponent<MagePlayerController>().isBeingAttacked = true;
+            }
             timeUntilNextAttack = maxTimeUntilNextAttack;
         }
         if (collision.gameObject.GetComponent<GemObjective>() && canAttack)
@@ -190,6 +194,13 @@ public abstract class BaseEnemy : MonoBehaviour
         {
             collision.gameObject.GetComponent<GemObjective>().TakeDamage(enemyDamage);
             timeUntilNextAttack = maxTimeUntilNextAttack;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<MagePlayerController>())
+        {
+            other.gameObject.GetComponent<MagePlayerController>().isBeingAttacked = false;
         }
     }
     void OnDrawGizmos()

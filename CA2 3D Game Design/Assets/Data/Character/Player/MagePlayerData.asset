@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3bdd86c539f964ebca4b54a1489beb, type: 3}
   m_Name: MagePlayerData
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  damage: 10
-  health: 10
+  moveSpeed: 13
+  damage: 5
+  health: 200
   ability1Sprite: {fileID: -3272184696137876264, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}
   ability2Sprite: {fileID: -4540553022140704257, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}
   ultimateSprite: {fileID: 5886820993961067050, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TankPlayerData
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  damage: 5
-  health: 15
+  damage: 10
+  health: 300
   ability1Sprite: {fileID: 7008212586696798454, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}
   ability2Sprite: {fileID: -3139383067747870335, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}
   ultimateSprite: {fileID: -8665578511894219080, guid: fa5cbd505eb37ab4e946d853ed3d9258, type: 3}

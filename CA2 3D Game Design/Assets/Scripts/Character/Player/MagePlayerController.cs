@@ -16,6 +16,7 @@ public class MagePlayerController : BasePlayerController
     [Header("Healer's Passive: Heal Over Time")]
     public float passiveHealthToHeal;
     public float setTimeTillStartHeal, timeTillStartHeal;
+    [HideInInspector] public bool isBeingAttacked = false;
 
     [Header("Mage's Ability: Area Healing")]
     [SerializeField] Collider[] playerColliders;
@@ -163,7 +164,6 @@ public class MagePlayerController : BasePlayerController
     //handles the passive trait of the healer
     public void PassiveHeal()
     {
-        bool isBeingAttacked = false;
         //if player isnt being attacked, time will be reduced till zero then player can passively heal
         //otherwise, resets the timer constantly until player gets out of combat
         if (isBeingAttacked)
