@@ -172,7 +172,7 @@ public abstract class BaseEnemy : MonoBehaviour
             collision.gameObject.GetComponentInParent<BasePlayerController>().TakeDamage(enemyDamage);
             timeUntilNextAttack = maxTimeUntilNextAttack;
         }
-        if (collision.gameObject.GetComponent<GemObjective>())
+        if (collision.gameObject.GetComponent<GemObjective>() && canAttack)
         {
             collision.gameObject.GetComponent<GemObjective>().TakeDamage(enemyDamage);
             timeUntilNextAttack = maxTimeUntilNextAttack;
@@ -186,7 +186,7 @@ public abstract class BaseEnemy : MonoBehaviour
             collision.gameObject.GetComponentInParent<BasePlayerController>().TakeDamage(enemyDamage);
             timeUntilNextAttack = maxTimeUntilNextAttack;
         }
-        if (collision.gameObject.GetComponent<GemObjective>())
+        if (collision.gameObject.GetComponent<GemObjective>() && canAttack)
         {
             collision.gameObject.GetComponent<GemObjective>().TakeDamage(enemyDamage);
             timeUntilNextAttack = maxTimeUntilNextAttack;
