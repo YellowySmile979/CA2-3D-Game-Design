@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GemObjective : MonoBehaviour
 {
-    public float portalHealth = 100f;
+    public float portalHealth;
 
     // Start is called before the first frame update
     void Start()

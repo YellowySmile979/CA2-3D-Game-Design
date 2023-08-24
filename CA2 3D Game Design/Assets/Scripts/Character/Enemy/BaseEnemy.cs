@@ -32,6 +32,9 @@ public abstract class BaseEnemy : MonoBehaviour
     [Header("Related to Abilities")]
     public bool isAttracted = false;
 
+    Animator enemyAnimator;
+    GemObjective gemHP;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,8 +47,10 @@ public abstract class BaseEnemy : MonoBehaviour
         enemyHealth = enemyData.health;
 
         timeUntilNextAttack = maxTimeUntilNextAttack;
-
+        enemyAnimator = GetComponent<Animator>();
         StartCoroutine(DetectObjects());
+
+        
     }
 
     // Update is called once per frame
@@ -54,6 +59,10 @@ public abstract class BaseEnemy : MonoBehaviour
         Move();
         Timer();
         UpdateHealth();
+        if (canAttack)
+        {
+            enemyAnimator.SetTrigger("isAttacking");
+        }
     }
     //moves enemy in direction of player
     void Move()
@@ -162,6 +171,10 @@ public abstract class BaseEnemy : MonoBehaviour
         {
             collision.gameObject.GetComponentInParent<BasePlayerController>().TakeDamage(enemyDamage);
             timeUntilNextAttack = maxTimeUntilNextAttack;
+        }
+        if (collision.gameObject.GetComponent<GemObjective>())
+        {
+            
         }
     }
     //checks to see if collided collider is player and enemy can attack and continues to do so

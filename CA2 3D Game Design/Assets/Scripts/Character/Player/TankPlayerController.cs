@@ -40,6 +40,7 @@ public class TankPlayerController : BasePlayerController
     void Start()
     {
         attractDuration = setAttractDuration;
+        canAttract = false;
     }
     public override void Attack()
     {
@@ -194,6 +195,7 @@ public class TankPlayerController : BasePlayerController
     //detects enemies
     void DetectEnemies()
     {
+        
         enemyColliders = Physics.OverlapSphere(transform.position, overlapSphereRadius, whatIsAnEnemy);
         if (hasStartedAttract)
         {
