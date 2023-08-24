@@ -18,7 +18,7 @@ public class MainMenuScreenManager : MonoBehaviour
     public void playInstructions()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadSceneAsync("Instructions);
+        SceneManager.LoadSceneAsync("Instructions");
     }
 
     public void StartGame() 
