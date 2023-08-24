@@ -1179,10 +1179,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2054017980}
   - {fileID: 1706676871}
   - {fileID: 1282693153}
   - {fileID: 1751296768}
+  - {fileID: 2054017980}
   - {fileID: 1202779287}
   - {fileID: 1952302138}
   m_Father: {fileID: 1018889027}
@@ -1372,8 +1372,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2042225050}
   - {fileID: 1427251579}
+  - {fileID: 2042225050}
   - {fileID: 648672277}
   - {fileID: 2036236460}
   - {fileID: 626689654}
@@ -1683,10 +1683,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 46ada882f2ba23b4b81b4a5219947a72, type: 3}
-    m_FontSize: 25
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -2732,6 +2732,10 @@ PrefabInstance:
     - target: {fileID: 3524894646567259794, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524894646567259795, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
+      propertyPath: spawnLimit
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
@@ -8155,9 +8159,9 @@ MonoBehaviour:
   mageAbilityOverlay: {fileID: 1999350755}
   mageUltimateOverlay: {fileID: 265968389}
   mageData: {fileID: 11400000, guid: d6bfff883a7ff234897c8b7c48049c8a, type: 2}
-  ultimateTankOverlay: {fileID: 1706676872}
+  ultimateTankOverlay: {fileID: 2054017981}
   ultimateTankImage: {fileID: 1952302139}
-  ultimateMageOverlay: {fileID: 648672278}
+  ultimateMageOverlay: {fileID: 2042225051}
   ultimateMageImage: {fileID: 1427251577}
   waveNumber: {fileID: 1326486579}
   nextWaveTimer: {fileID: 806051817}
@@ -12026,6 +12030,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3524894646567259795, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
+      propertyPath: spawnLimit
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
 --- !u!1 &1114747037
@@ -12941,7 +12949,7 @@ RectTransform:
   m_Children:
   - {fileID: 2029311440}
   m_Father: {fileID: 220234284}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -14173,7 +14181,7 @@ GameObject:
   - component: {fileID: 1427251578}
   - component: {fileID: 1427251577}
   m_Layer: 5
-  m_Name: Ult Fill (1)
+  m_Name: Ult BGD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14229,7 +14237,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 265968390}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14672,6 +14680,10 @@ PrefabInstance:
     - target: {fileID: 3524894646567259794, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524894646567259795, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
+      propertyPath: spawnLimit
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
@@ -15994,7 +16006,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 220234284}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16165,7 +16177,7 @@ GameObject:
   - component: {fileID: 1751296769}
   - component: {fileID: 1751296770}
   m_Layer: 5
-  m_Name: Ult Fill
+  m_Name: Ult BGD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16183,7 +16195,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 220234284}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18287,7 +18299,7 @@ GameObject:
   - component: {fileID: 2042225052}
   - component: {fileID: 2042225051}
   m_Layer: 5
-  m_Name: Ultimate Tank BG
+  m_Name: Ultimate Tank Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18305,7 +18317,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 265968390}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18333,7 +18345,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -3471004447394538041, guid: f254c3d81b73f3945bb3b3de96fc6445, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -18399,7 +18411,7 @@ GameObject:
   - component: {fileID: 2054017982}
   - component: {fileID: 2054017981}
   m_Layer: 5
-  m_Name: Ultimate Tank BGD
+  m_Name: Ultimate Tank Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18417,7 +18429,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 220234284}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -18445,7 +18457,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -3471004447394538041, guid: f254c3d81b73f3945bb3b3de96fc6445, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -18516,6 +18528,10 @@ PrefabInstance:
     - target: {fileID: 3524894646567259794, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524894646567259795, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}
+      propertyPath: spawnLimit
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd897d0bd7de95b4b80563da640dc4ae, type: 3}

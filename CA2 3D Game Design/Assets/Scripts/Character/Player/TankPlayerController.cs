@@ -54,6 +54,7 @@ public class TankPlayerController : BasePlayerController
         if (Input.GetButton("Fire1 " + whichPlayer.ToString()) && hasPlayed == true)
         {
             hasPlayed = false;
+            if(baseAttackSFX != null)
             audioSource.PlayOneShot(baseAttackSFX);
             PlayerAttackAnims();
             Debug.Log("smth");
@@ -63,6 +64,7 @@ public class TankPlayerController : BasePlayerController
             print("Heal");
             Heal(healAmount);
 
+            if(selfHealSFX != null)
             audioSource.PlayOneShot(selfHealSFX);
             //play heal anim
             playerAnimator.SetTrigger("ABL_Heal");
@@ -87,6 +89,7 @@ public class TankPlayerController : BasePlayerController
             playerAnimator.SetTrigger("ABL_Attract");
             hasStartedAttract = true;
 
+            if(attractSFX != null)
             audioSource.PlayOneShot(attractSFX);
 
             GameObject attractAA = Instantiate(attractVFX, transform.position, Quaternion.identity);
@@ -109,6 +112,7 @@ public class TankPlayerController : BasePlayerController
 
         if (Input.GetKeyDown(KeyCode.Q) && enemiesKilled >= requiredKills)
         {
+            if(ultiSFX != null)
             audioSource.PlayOneShot(ultiSFX);
             TankUltimate();
             enemiesKilled = 0;

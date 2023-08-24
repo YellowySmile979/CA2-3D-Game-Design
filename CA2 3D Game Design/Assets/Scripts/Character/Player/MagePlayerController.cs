@@ -93,6 +93,7 @@ public class MagePlayerController : BasePlayerController
         if (Input.GetAxisRaw("Fire1 " + whichPlayer.ToString()) > 0.1 && timeTillNextSpawn <= 0 && hasPlayed == true && canMove)
         {
             hasPlayed = false;
+            if(baseAttackSFX != null)
             audioSource.PlayOneShot(baseAttackSFX);
             playerAnimator.SetTrigger("isAttacking");
             Invoke("EnableAttack", coolDownBetweenAttacks);
@@ -112,6 +113,7 @@ public class MagePlayerController : BasePlayerController
         if (Input.GetKeyDown("joystick button 4") && canAreaHeal)
         {
             print("Area Healing");
+            if(areaHealingSFX != null)
             audioSource.PlayOneShot(areaHealingSFX);
             playerAnimator.SetTrigger("ABL_Heal");
             hasStartedAreaHealing = true;

@@ -88,11 +88,12 @@ public class WaveManager : MonoBehaviour
         {
             SceneManager.LoadScene("Win");
         }
-        if(waveNumber >= 51)
+        if(waveNumber >= 26)
         {
             gameState = GameState.Win;
         }
     }
+    int counter3 = 0;
     //increases wave number and sets the state to prep
     public void IncreaseWaveNumber(int counter = 0)
     {
@@ -105,14 +106,21 @@ public class WaveManager : MonoBehaviour
                 //restricts how much players can level up
                 if (waveNumber <= 20)
                 {
-                    playerLevel++;
-                    //levels up the player
-                    foreach (BasePlayerController basePlayerController in players)
+                    if (counter3 >= 5)
                     {
-                        if (!basePlayerController.hasLevelledUp)
+                        playerLevel++;
+                        //levels up the player
+                        foreach (BasePlayerController basePlayerController in players)
                         {
-                            basePlayerController.LevelUp(playerLevel);
+                            if (!basePlayerController.hasLevelledUp)
+                            {
+                                basePlayerController.LevelUp(playerLevel);
+                            }
                         }
+                    }
+                    else if(counter < 5)
+                    {
+                        counter3++;
                     }
                 }
 

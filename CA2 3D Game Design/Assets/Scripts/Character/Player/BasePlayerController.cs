@@ -94,6 +94,7 @@ public abstract class BasePlayerController : MonoBehaviour
             }
             if(horizontalInput != 0 && verticalInput != 0)
             {
+                if(walkingSFX != null)
                 audioSource.PlayOneShot(walkingSFX);
             }
         }
