@@ -148,19 +148,13 @@ public abstract class BasePlayerController : MonoBehaviour
     //allows palyer to take damage
     public void TakeDamage(float damage)
     {
+        CanvasController.Instance.UpdatePlayerStats(this);
         playerHealth -= damage;
     }
     //updates the health of the player
     public void UpdateHealth()
     {
-        if(this.GetComponent<TankPlayerController>())
-        {
-            CanvasController.Instance.UpdatePlayerStats(this.GetComponent<TankPlayerController>());
-        }
-        else if (this.GetComponent<MagePlayerController>())
-        {
-            CanvasController.Instance.UpdatePlayerStats(this.GetComponent<MagePlayerController>());
-        }
+        CanvasController.Instance.UpdatePlayerStats(this);
 
         //print("Player Health: " + playerHealth);
         if (playerHealth <= 0)
