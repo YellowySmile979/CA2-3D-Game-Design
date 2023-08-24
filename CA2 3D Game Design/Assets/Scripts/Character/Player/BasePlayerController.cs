@@ -153,7 +153,14 @@ public abstract class BasePlayerController : MonoBehaviour
     //updates the health of the player
     public void UpdateHealth()
     {
-        CanvasController.Instance.UpdatePlayerStats(this);
+        if(this.GetComponent<TankPlayerController>())
+        {
+            CanvasController.Instance.UpdatePlayerStats(this.GetComponent<TankPlayerController>());
+        }
+        else if (this.GetComponent<MagePlayerController>())
+        {
+            CanvasController.Instance.UpdatePlayerStats(this.GetComponent<MagePlayerController>());
+        }
 
         //print("Player Health: " + playerHealth);
         if (playerHealth <= 0)
